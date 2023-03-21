@@ -1,0 +1,36 @@
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw; /* make the image full screen */
+  height: 100vh; /* make the image full screen */
+  z-index: -1; /* put the image behind other elements */
+}
+
+.button {
+  position: absolute;
+  top: 65%; /* position the button in the middle of the screen vertically */
+  left: 50%; /* position the button in the middle of the screen horizontally */
+  transform: translate(-50%, -50%); /* center the button */
+  background-color: #54ADFF;
+  opacity: 0.8;
+  color: #ffffff;
+  border: none;
+  padding: 20px 40px;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+.text {
+  position: absolute;
+  bottom: 10px; /* position the text at the bottom of the screen */
+  left: 50%; /* center the text horizontally */
+  transform: translateX(-50%);
+  color: #ffffff;
+  font-size: 14px;
+
+  span {
+    color: #00bfff; /* change the color of the "Login" text */
+    cursor: pointer;
+  }
+}
