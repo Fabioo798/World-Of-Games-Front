@@ -1,1 +1,19 @@
-<p>login works!</p>
+<img class="background" alt="home-background" class="image" src="./../../../assets/backgroun2.jpg">
+
+<form [formGroup]="login" (ngSubmit)="handleSubmit()">
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" id="email" formControlName="email" required />
+  </div>
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <input type="password" id="password" formControlName="password" required />
+  </div>
+<button type="submit" [disabled]="isLoading">{{ isLoading ? 'Loading...' : 'LOGIN' }}</button>
+<p *ngIf="isSuccess">You are registered successfully!</p>
+<div class="error" *ngIf="isError">Login failed. Credentials incorrect</div>
+</form>
+
+<div class="text">
+  <p>Don't you have an account yet? <span routerLink="/register">Register</span></p>
+</div>
