@@ -10,7 +10,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of, throwError } from 'rxjs';
 
 import { RegisterComponent } from './register.component';
-import { repoService, User } from 'src/app/services/register.service';
+import { repoService, User } from 'src/app/services/user/user.service';
 import { ActivatedRoute } from '@angular/router';
 
 describe('RegisterComponent', () => {
