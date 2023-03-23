@@ -1,18 +1,22 @@
+body {
+  position: relative; /* add relative positioning to body to position absolute elements within it */
+}
+
 .image {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw; /* make the image full screen */
-  height: 100vh; /* make the image full screen */
-  z-index: -1; /* put the image behind other elements */
+  width: 100vh;
+  height: auto;
+  z-index: -1;
 }
 
 .button {
   position: absolute;
-  top: 65%; /* position the button in the middle of the screen vertically */
-  left: 50%; /* position the button in the middle of the screen horizontally */
-  transform: translate(-50%, -50%); /* center the button */
-  background-color: #54ADFF;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #54adff;
   opacity: 0.8;
   color: #ffffff;
   border: none;
@@ -23,14 +27,24 @@
 
 .text {
   position: absolute;
-  bottom: 10px; /* position the text at the bottom of the screen */
-  left: 50%; /* center the text horizontally */
+  bottom: 10px;
+  left: 50%;
   transform: translateX(-50%);
   color: #ffffff;
-  font-size: 14px;
+  font-size: 22px;
 
   span {
-    color: #00bfff; /* change the color of the "Login" text */
+    color: #00bfff;
     cursor: pointer;
   }
+}
+
+.title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-size: 50px;
+  width: 80%; /* adjust the width as needed */
 }
