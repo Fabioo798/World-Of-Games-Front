@@ -9,7 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of, throwError } from 'rxjs';
 import { LoginComponent } from './login.component';
-import { repoService, User } from 'src/app/services/register.service';
+import { repoService, User } from 'src/app/services/user/user.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

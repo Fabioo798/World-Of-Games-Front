@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User, repoService } from 'src/app/services/register.service';
+import { User, repoService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-login',
@@ -37,26 +37,28 @@ export class LoginComponent {
       password: this.login.value.password,
     };
     console.log(sendLogUser);
-    this.srv.loginUser(sendLogUser).subscribe((response: any) => {
-      console.log(response);
-      console.log('user logged');
-      this.token = response.results.token; // Store the token
-      console.log('Token:', this.token);
-      localStorage.setItem('token', this.token); // Save the token to the local storage
-      this.isSuccess = true;
+    this.srv.loginUser(sendLogUser).subscribe(
+      (response: any) => {
+        console.log(response);
+        console.log('user logged');
+        this.token = response.results.token; // Store the token
+        console.log('Token:', this.token);
+        localStorage.setItem('token', this.token); // Save the token to the local storage
+        this.isSuccess = true;
         setTimeout(() => {
           this.isSuccess = false;
           this.router.navigateByUrl('/home');
         }, 2000);
-    },
-    (error: any) => {
-      console.log(error);
-      this.isLoading = false;
-      this.isError = true;
-      setTimeout(() => {
-        this.isError = false;
-      }, 2000);
-    });
+      },
+      (error: any) => {
+        console.log(error);
+        this.isLoading = false;
+        this.isError = true;
+        setTimeout(() => {
+          this.isError = false;
+        }, 2000);
+      }
+    );
     this.login.reset();
   }
 
