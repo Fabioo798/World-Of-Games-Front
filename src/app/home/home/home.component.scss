@@ -1,0 +1,50 @@
+body {
+  position: relative; /* add relative positioning to body to position absolute elements within it */
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vh;
+  height: auto;
+  z-index: -1;
+}
+
+.button {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #54adff;
+  opacity: 0.8;
+  color: #ffffff;
+  border: none;
+  padding: 20px 40px;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+.text {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffffff;
+  font-size: 22px;
+
+  span {
+    color: #00bfff;
+    cursor: pointer;
+  }
+}
+
+.title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-size: 50px;
+  width: 80%; /* adjust the width as needed */
+}

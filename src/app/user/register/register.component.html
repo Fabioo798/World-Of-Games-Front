@@ -1,0 +1,27 @@
+<img class="background" alt="home-background" class="image" src="./../../../assets/backgroun2.jpg">
+
+<form class="register-form" [formGroup]="newUser" (ngSubmit)="handleSubmit()">
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" formControlName="name">
+  </div>
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" formControlName="email">
+  </div>
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <input type="password" formControlName="password">
+  </div>
+  <div class="form-group">
+    <label for="img">Upload image</label>
+    <input type="file" formControlName="img">
+  </div>
+  <button type="submit" [disabled]="isLoading">{{ isLoading ? 'Loading...' : 'Register' }}</button>
+  <p *ngIf="isSuccess">You are registered successfully!</p>
+  <div class="error" *ngIf="isError">Error during registration</div>
+</form>
+
+<div class="text">
+  <p>You already have an account? <span routerLink="/login">Login</span></p>
+</div>

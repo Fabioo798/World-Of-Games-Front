@@ -1,0 +1,70 @@
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vh; /* make the image full screen */
+  height: auto; /* make the image full screen */
+  z-index: -1; /* put the image behind other elements */
+}
+
+form {
+  display: flex;
+  top: 50%;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+  color: white;
+  padding-top: 60%;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  }
+
+  button[type="submit"] {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #0062cc;
+    }
+  }
+
+  .error {
+    padding-top: 20px;
+    color: red;
+    font-size: 20px;
+  }
+}
+
+.text {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffffff;
+  font-size: 19px;
+
+  span {
+    color: #00bfff;
+    cursor: pointer;
+  }
+}
