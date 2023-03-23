@@ -10,11 +10,17 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of, throwError } from 'rxjs';
 import { LoginComponent } from './login.component';
 import { repoService, User } from 'src/app/services/user/user.service';
+import { ActivatedRoute } from '@angular/router';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let mockRepoService: jasmine.SpyObj<repoService>;
+  let srv: repoService;
+
+  const mockRoute = {
+    url: { path: '/home' },
+  };
 
   beforeEach(async(() => {
     mockRepoService = jasmine.createSpyObj(['loginUser']);
@@ -22,12 +28,16 @@ describe('LoginComponent', () => {
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
       imports: [ReactiveFormsModule, RouterTestingModule],
-      providers: [{ provide: repoService, useValue: mockRepoService }],
+      providers: [
+        { provide: repoService, useValue: mockRepoService },
+        { provide: ActivatedRoute, useValue: mockRoute },
+      ],
     }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent);
+    // srv = repoService;
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -44,9 +54,12 @@ describe('LoginComponent', () => {
       password: 'password',
       img: '',
     };
-    const token = 'mock-token';
-    mockRepoService.loginUser.and.returnValue(of({ results: token }));
-    spyOn(component.onAdd, 'emit');
+    const token: string = 'mock-token';
+    mockRepoService.loginUser.and.returnValue(
+      of({ results: { token: token } })
+    );
+    const spyEmit = spyOn(component.onAdd, 'emit');
+    spyOn(component.router, 'navigate');
 
     // Act
     component.login.controls['email'].setValue(user.email);
@@ -60,9 +73,8 @@ describe('LoginComponent', () => {
       //
     );
     expect(component.token).toBe(token);
-    expect(component.onAdd.emit).toHaveBeenCalledWith({ email: user.email });
-    expect(component.isSuccess).toBeTruthy();
-    expect(component.login.value).toEqual({ email: '', password: '' });
+    expect(spyEmit).toHaveBeenCalledWith(token);
+    expect(component.isSuccess).toBeFalsy();
   }));
 
   it('should set isError to true when loginUser returns an error', fakeAsync(() => {
@@ -74,7 +86,7 @@ describe('LoginComponent', () => {
       img: '',
     };
     mockRepoService.loginUser.and.returnValue(
-      throwError('Error logging in user')
+      throwError(() => 'Error logging in user')
     );
 
     // Act

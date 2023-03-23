@@ -23,7 +23,7 @@ describe('RegisterComponent', () => {
     url: { path: '/login' },
   };
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     mockRepoService = jasmine.createSpyObj(['registerUser']);
 
     TestBed.configureTestingModule({
@@ -34,7 +34,7 @@ describe('RegisterComponent', () => {
         { provide: ActivatedRoute, useValue: mockRoute },
       ],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterComponent);
@@ -56,7 +56,7 @@ describe('RegisterComponent', () => {
     };
     mockRepoService.registerUser.and.returnValue(of({ result: user }));
     spyOn(component.onAdd, 'emit');
-
+    spyOn(component.router, 'navigate');
     // Act
     component.newUser.controls['name'].setValue(user.name);
     component.newUser.controls['email'].setValue(user.email);
@@ -66,8 +66,9 @@ describe('RegisterComponent', () => {
     // Assert
     expect(mockRepoService.registerUser).toHaveBeenCalledWith(user);
     expect(component.onAdd.emit).toHaveBeenCalledWith(user);
+    expect(component.router.navigate).toHaveBeenCalled();
+
     expect(component.isSuccess).toBeFalsy();
-    expect(component.router.url).toBe('login');
   }));
   it('should set isError to true when registerUser returns an error', fakeAsync(() => {
     // Arrange
@@ -78,7 +79,7 @@ describe('RegisterComponent', () => {
       img: '',
     };
     mockRepoService.registerUser.and.returnValue(
-      throwError('Error registering user')
+      throwError(() => 'Error registering user')
     );
 
     // Act
