@@ -1,2 +1,8 @@
-<p class="text">Already have an account? <span>Login</span></p>
-<p class="text">You don't have an account yet? <span>Register</span></p>
+<div class="menu" *ngIf="currentPage === '/games'">
+  <!-- add menu items here -->
+</div>
+<div class="text" *ngIf="currentPage !== '/games'">
+</div>
+<!-- <div class="text" *ngIf="currentPage === '/login'">
+  You don't have an account yet? <span>Register</span>
+</div> -->
