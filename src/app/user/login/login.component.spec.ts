@@ -1,5 +1,4 @@
 import {
-  async,
   ComponentFixture,
   fakeAsync,
   TestBed,
@@ -9,35 +8,36 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of, throwError } from 'rxjs';
 import { LoginComponent } from './login.component';
-import { repoService, User } from 'src/app/services/user/user.service';
+import { RepoUserService, User } from 'src/app/services/user/user.service';
 import { ActivatedRoute } from '@angular/router';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-  let mockRepoService: jasmine.SpyObj<repoService>;
-  let srv: repoService;
+  let mockRepoService: jasmine.SpyObj<RepoUserService>;
+  let srv: RepoUserService;
 
   const mockRoute = {
     url: { path: '/home' },
   };
 
-  beforeEach(async(() => {
+  const pass = 'pass';
+
+  beforeEach(() => {
     mockRepoService = jasmine.createSpyObj(['loginUser']);
 
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
       imports: [ReactiveFormsModule, RouterTestingModule],
       providers: [
-        { provide: repoService, useValue: mockRepoService },
+        { provide: RepoUserService, useValue: mockRepoService },
         { provide: ActivatedRoute, useValue: mockRoute },
       ],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent);
-    // srv = repoService;
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -51,7 +51,7 @@ describe('LoginComponent', () => {
     const user: User = {
       name: 'John Doe',
       email: 'johndoe@example.com',
-      password: 'password',
+      password: pass,
       img: '',
     };
     const token: string = 'mock-token';
@@ -82,7 +82,7 @@ describe('LoginComponent', () => {
     const user: User = {
       name: 'John Doe',
       email: 'johndoe@example.com',
-      password: 'password',
+      password: pass,
       img: '',
     };
     mockRepoService.loginUser.and.returnValue(

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, NgZone, Output } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User, repoService } from 'src/app/services/user/user.service';
+import { User, RepoUserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +17,7 @@ export class RegisterComponent {
 
   constructor(
     public form: FormBuilder,
-    public srv: repoService,
+    public srv: RepoUserService,
     public router: Router,
     private zone: NgZone
   ) {

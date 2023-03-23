@@ -15,7 +15,7 @@ export type apiAnswer = {
 @Injectable({
   providedIn: 'root',
 })
-export class repoService {
+export class RepoUserService {
   private apiUrl = 'http://localhost:4800/users/register';
 
   constructor(private http: HttpClient) {}

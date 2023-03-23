@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User, repoService } from 'src/app/services/user/user.service';
+import { User, RepoUserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginComponent {
   isError: boolean;
   constructor(
     public form: FormBuilder,
-    public srv: repoService,
+    public srv: RepoUserService,
     public router: Router,
     private zone: NgZone
   ) {

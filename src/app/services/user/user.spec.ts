@@ -3,18 +3,20 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { repoService, User } from './user.service';
+import { RepoUserService, User } from './user.service';
 
 describe('repoService', () => {
-  let service: repoService;
+  let service: RepoUserService;
   let httpMock: HttpTestingController;
+
+  const pass = 'pass';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [repoService],
+      providers: [RepoUserService],
     });
-    service = TestBed.inject(repoService);
+    service = TestBed.inject(RepoUserService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
@@ -31,7 +33,7 @@ describe('repoService', () => {
       const user: User = {
         name: 'Test User',
         email: 'test@test.com',
-        password: 'password',
+        password: pass,
         img: 'test.jpg',
       };
 
@@ -49,7 +51,7 @@ describe('repoService', () => {
     it('should login a user', () => {
       const user: Partial<User> = {
         email: 'test@test.com',
-        password: 'password',
+        password: pass,
       };
 
       service.loginUser(user).subscribe((result) => {
@@ -77,7 +79,7 @@ describe('repoService', () => {
         {
           name: 'Test User',
           email: 'test@test.com',
-          password: 'password',
+          password: pass,
           img: 'test.jpg',
         },
       ]);

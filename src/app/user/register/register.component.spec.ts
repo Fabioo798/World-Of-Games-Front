@@ -1,5 +1,4 @@
 import {
-  async,
   ComponentFixture,
   fakeAsync,
   TestBed,
@@ -10,18 +9,20 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of, throwError } from 'rxjs';
 
 import { RegisterComponent } from './register.component';
-import { repoService, User } from 'src/app/services/user/user.service';
+import { RepoUserService, User } from 'src/app/services/user/user.service';
 import { ActivatedRoute } from '@angular/router';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
-  let mockRepoService: jasmine.SpyObj<repoService>;
+  let mockRepoService: jasmine.SpyObj<RepoUserService>;
   let router: ActivatedRoute;
 
   const mockRoute = {
     url: { path: '/login' },
   };
+
+  const pass = 'pass';
 
   beforeEach(() => {
     mockRepoService = jasmine.createSpyObj(['registerUser']);
@@ -30,7 +31,7 @@ describe('RegisterComponent', () => {
       declarations: [RegisterComponent],
       imports: [ReactiveFormsModule, RouterTestingModule],
       providers: [
-        { provide: repoService, useValue: mockRepoService },
+        { provide: RepoUserService, useValue: mockRepoService },
         { provide: ActivatedRoute, useValue: mockRoute },
       ],
     }).compileComponents();
@@ -51,7 +52,7 @@ describe('RegisterComponent', () => {
     const user: User = {
       name: 'John Doe',
       email: 'johndoe@example.com',
-      password: 'password',
+      password: pass,
       img: '',
     };
     mockRepoService.registerUser.and.returnValue(of({ result: user }));
@@ -75,7 +76,7 @@ describe('RegisterComponent', () => {
     const user: User = {
       name: 'John Doe',
       email: 'johndoe@example.com',
-      password: 'password',
+      password: pass,
       img: '',
     };
     mockRepoService.registerUser.and.returnValue(
