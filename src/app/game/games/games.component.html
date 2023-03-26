@@ -1,0 +1,33 @@
+<img alt="home-background" class="image" src="./../../../assets/background3.png">
+
+<div>
+  <label for="category-select">Filter by category:</label>
+<select id="category-select" [(ngModel)]="selectedCategory" (ngModelChange)="onCategorySelect()">
+    <option value="">All</option>
+    <option value="MOBA">MOBA</option>
+    <option value="RPG">RPG</option>
+    <option value="MMO">MMO</option>
+    <option value="FPS">FPS</option>
+    <option value="Action">Action</option>
+  </select>
+</div>
+
+<ul>
+  <li *ngFor="let game of gamesrv.games$ | async">
+    <a [routerLink]="game.id">
+      <div>
+        <img class="game-img" [src]="game.img" alt="{{game.gameName}}">
+        <p>
+          {{ game.gameName }}
+        </p>
+        <p>
+          {{ game.category }}
+        </p>
+        <p>
+          {{ game.price }}
+        </p>
+      </div>
+    </a>
+    <mat-icon (click)="addCart(game)">shopping_cart</mat-icon>
+  </li>
+</ul>

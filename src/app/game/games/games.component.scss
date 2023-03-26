@@ -1,0 +1,66 @@
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vh; /* make the image full screen */
+  height: auto; /* make the image full screen */
+  z-index: -1; /* put the image behind other elements */
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+li:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.game-img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+div {
+  padding: 20px;
+}
+
+p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+p:first-child {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+p:last-child {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+mat-icon {
+  color: white;
+}
