@@ -1,0 +1,20 @@
+<img alt="home-background" class="image" src="./../../../assets/background3.png">
+
+
+<section class="game-detail">
+  <div class="game-image">
+    <img src="{{game.img}}" alt="{{game.gameName}}" />
+  </div>
+  <div class="game-info">
+    <h2>{{game.gameName}}</h2>
+    <p class="game-category">{{game.category}}</p>
+    <p class="game-release-date">Released on: {{game.releaseDate}}</p>
+    <p class="game-price">Price: {{game.price}}</p>
+    <p class="game-description">{{game.description}}</p>
+    <div class="game-owner">
+      <!-- <img src="{{game.owner?.avatar}}" alt="{{game.owner?.username}}" />
+      <p>{{game.owner?.username}}</p> -->
+      <p>{{game.owner}}</p>
+    </div>
+  </div>
+</section>
