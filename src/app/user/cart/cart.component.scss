@@ -1,0 +1,38 @@
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vh; /* make the image full screen */
+  height: auto; /* make the image full screen */
+  z-index: -1; /* put the image behind other elements */
+}
+
+.user-games {
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      li {
+        margin-bottom: 2rem;
+        .game-info {
+          display: flex;
+          align-items: center;
+          img {
+            width: 150px;
+            height: 150px;
+            margin-right: 2rem;
+            object-fit: cover;
+          }
+          .game-details {
+            p {
+              margin: 0.5rem 0;
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
