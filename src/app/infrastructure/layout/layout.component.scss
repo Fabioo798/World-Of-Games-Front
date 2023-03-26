@@ -1,15 +1,40 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .header {
-  width: 100vh;
-  height: 10vh;
+  height: 150px; /* Set the height of the header */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100; /* Make sure the header is on top of other elements */
 }
 
 main {
-  position: absolute;
-  width: 100vh;
-  height: 160vh;
+  flex: 1; /* Make the main section take up the remaining space */
+  padding-top: 44px; /* Add padding to the top to make space for the header */
+  padding-bottom: 56px; /* Add padding to the bottom to make space for the footer */
+  margin: 0;
+  margin-top: 100px
+
 }
 
 .footer {
-  width: 100vh;
-  height: 10vh;
+  height: 150px; /* Set the height of the footer */
+  // background-color: #333; /* Set the background color of the footer */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100; /* Make sure the footer is on top of other elements */
+}
+
+/* Center the menu items in the footer */
+app-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
