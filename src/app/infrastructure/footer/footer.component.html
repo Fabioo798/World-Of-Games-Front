@@ -1,8 +1,12 @@
-<div class="menu" *ngIf="currentPage === '/games'">
-  <!-- add menu items here -->
+<div class="menu" *ngIf="currentPage !== '/home' && currentPage !== '/login' && currentPage !== '/register'">
+  <ng-content></ng-content>
 </div>
-<div class="text" *ngIf="currentPage !== '/games'">
+<div class="login" *ngIf="currentPage === '/login'">
+  <p>Don't you have an account yet? <span routerLink="/register">Register</span></p>
 </div>
-<!-- <div class="text" *ngIf="currentPage === '/login'">
-  You don't have an account yet? <span>Register</span>
-</div> -->
+<div class="login" *ngIf="currentPage === '/register'">
+  <p>You already have an account? <span routerLink="/login">Login</span></p>
+</div>
+<div class="login" *ngIf="currentPage ===  '/home' ">
+  <p>You already have an account? <span routerLink="/login">Login</span></p>
+</div>

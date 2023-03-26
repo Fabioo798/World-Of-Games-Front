@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, Event, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-footer',
@@ -7,11 +8,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-  currentPage!: string;
+  currentPage: string = '/';
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.currentPage = this.router.url;
+    this.router.events
+      .pipe(
+        filter(
+          (event: Event): event is NavigationEnd =>
+            event instanceof NavigationEnd
+        )
+      )
+      .subscribe((event: NavigationEnd) => {
+        this.currentPage = event.url;
+        console.log(this.currentPage);
+      });
   }
 }
