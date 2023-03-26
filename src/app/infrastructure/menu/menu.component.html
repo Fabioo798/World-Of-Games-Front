@@ -1,0 +1,10 @@
+<nav>
+  <ul>
+    <li *ngFor="let bt of btns">
+      <a [routerLink]="bt.path">
+        <mat-icon>{{ bt.icon }}</mat-icon>
+        {{ bt.label }}
+      </a>
+    </li>
+  </ul>
+</nav>
