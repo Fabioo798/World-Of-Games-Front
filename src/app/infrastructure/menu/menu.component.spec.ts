@@ -7,18 +7,18 @@ describe('MenuComponent', () => {
   let component: MenuComponent;
   let fixture: ComponentFixture<MenuComponent>;
 
- beforeEach(async () => {
-  await TestBed.configureTestingModule({
-    declarations: [MenuComponent],
-    imports: [RouterTestingModule, MatIconModule],
-  }).compileComponents();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [MenuComponent],
+      imports: [RouterTestingModule, MatIconModule],
+    }).compileComponents();
 
-  fixture = TestBed.createComponent(MenuComponent);
-  component = fixture.componentInstance;
-  fixture.detectChanges();
- });
+    fixture = TestBed.createComponent(MenuComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
- it('should create', () => {
-  expect(component).toBeTruthy();
- });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

@@ -12,11 +12,7 @@ import { RegisterComponent } from './register.component';
 import { RepoUserService } from 'src/app/services/user/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/types/types';
-import {
-  mockRoute,
-  mockUser,
-  mockUserService,
-} from './../../utils/mocks';
+import { mockRoute, mockUser, mockUserService } from './../../utils/mocks';
 import {
   getStorage,
   provideStorage,
@@ -85,6 +81,7 @@ describe('RegisterComponent', () => {
           ],
         },
       };
+      srv.currentUser$.next(mockUser);
       component.isUpdate = true;
       component.saveImage(mockEvent);
       const spyUpload = spyOn(component, 'uploadImage').and.resolveTo();
@@ -143,7 +140,7 @@ describe('RegisterComponent', () => {
       }));
     });
 
-    describe('When the createUser method returns an error', () => {
+    describe('(ERROR)When the createUser method returns an error', () => {
       it('Should display error message', fakeAsync(() => {
         component.newUser.value['UserName'] = 'TestName';
         component.newUser.value['releaseDate'] = 'TestReleaseDate';
@@ -168,9 +165,43 @@ describe('RegisterComponent', () => {
         component.saveImage(mockEvent);
         const spyUpload = spyOn(component, 'uploadImage').and.resolveTo();
         const spyGetImage = spyOn(component, 'getImage').and.resolveTo('mock');
-
+        component.ngOnInit();
         component.handleSubmit();
-        tick(3000);
+        tick(2000);
+
+        expect(spyUpload).toHaveBeenCalled();
+        expect(spyGetImage).toHaveBeenCalled();
+        expect(component.isSuccess).toBeFalse();
+        expect(component.isError).toBeFalse();
+      }));
+    });
+    describe('(ERROR)When the updateUser method returns an error', () => {
+      it('Should display error message', fakeAsync(() => {
+        component.newUser.value['UserName'] = 'TestName';
+        component.newUser.value['releaseDate'] = 'TestReleaseDate';
+        component.newUser.value['category'] = 'TestCategory';
+        component.newUser.value['price'] = 'TestPrice';
+        component.newUser.value['description'] = 'TestDescription';
+        component.newUser.value['img'] = 'TestImg';
+        spyOn(srv, 'updateUser').and.returnValue(throwError(() => 'error'));
+        const mockEvent = {
+          target: {
+            files: [
+              {
+                name: 'test',
+                size: 0,
+                type: 'image/png',
+              },
+            ],
+          },
+        };
+        component.isUpdate = true;
+        component.saveImage(mockEvent);
+        const spyUpload = spyOn(component, 'uploadImage').and.resolveTo();
+        const spyGetImage = spyOn(component, 'getImage').and.resolveTo('mock');
+        component.ngOnInit();
+        component.handleSubmit();
+        tick(2000);
 
         expect(spyUpload).toHaveBeenCalled();
         expect(spyGetImage).toHaveBeenCalled();
