@@ -9,7 +9,7 @@ import {
   ServerCompleteUserResponse,
 } from 'src/app/types/server.response';
 import { Login } from 'src/app/types/types';
-import { mockToken, mockUser } from 'src/app/utils/mocks';
+import { mockToken, mockUser, mockUser1 } from 'src/app/utils/mocks';
 import { RepoUserService } from './user.service';
 
 describe('RepoUserService', () => {
@@ -83,7 +83,7 @@ describe('RepoUserService', () => {
 
   describe('When the getCurrentUser method is called', () => {
     describe('And there is no token$', () => {
-      it('should return the user from API', async () => {
+      it('should not return the user from API', async () => {
         service.token$.next('');
         const mockResp: ServerCompleteUserResponse = {
           results: [mockUser],
@@ -135,20 +135,73 @@ describe('RepoUserService', () => {
     });
   });
 
+  describe('When registerUser method is called', () => {
+    it('it should send a post request with the user data', async () => {
+      service.registerUser(mockUser).subscribe((resp) => {
+        expect(resp).not.toBeNull();
+      });
+      expect(httpTestingController).toBeTruthy();
+      const req = httpTestingController.expectOne(
+        'http://localhost:4800/users/register'
+      );
+      req.flush(mockUser);
 
-    describe('When registerUser method is called', () => {
-      it('it should send a post request with the user data', async () => {
-        service.registerUser(mockUser).subscribe((resp) => {
+      expect(req.request.method).toEqual('POST');
+    });
+  });
+
+  describe('When the updateUser method is called', () => {
+    describe('And there is no token$', () => {
+      it('should not return the user from API', async () => {
+        service.token$.next('TestToken');
+        const mockResp = {
+          results: mockUser1,
+        };
+        const header = new HttpHeaders({
+          ['Authorization']: `Bearer ${service.token$.value}`,
+        });
+        service.updateUser('123', mockUser1).subscribe((resp) => {
           expect(resp).not.toBeNull();
-          // expect(JSON.stringify(resp)).toBe(JSON.stringify(mockUser))
+          expect(JSON.stringify(resp)).toBe(JSON.stringify(mockUser1));
         });
         expect(httpTestingController).toBeTruthy();
         const req = httpTestingController.expectOne(
-          'http://localhost:4800/users/register'
+          'http://localhost:4800/users/123'
         );
-        req.flush(mockUser);
+        req.flush(mockUser1);
 
-        expect(req.request.method).toEqual('POST');
+        expect(req.request.method).toEqual('PUT');
+        expect(JSON.stringify(req.request.headers)).toBe(
+          JSON.stringify(header)
+        );
       });
     });
+  });
+  describe('When the deleteUser method is called', () => {
+    describe('And there is token$', () => {
+      it('should return the user from API', async () => {
+        service.token$.next('TestToken');
+        const mockResp = {
+          results: mockUser1,
+        };
+        const header = new HttpHeaders({
+          ['Authorization']: `Bearer ${service.token$.value}`,
+        });
+        service.deleteUser('123').subscribe((resp) => {
+          expect(resp).not.toBeNull();
+          expect(JSON.stringify(resp)).toBe(JSON.stringify(mockUser1));
+        });
+        expect(httpTestingController).toBeTruthy();
+        const req = httpTestingController.expectOne(
+          'http://localhost:4800/users/123'
+        );
+        req.flush(mockUser1);
+
+        expect(req.request.method).toEqual('DELETE');
+        expect(JSON.stringify(req.request.headers)).toBe(
+          JSON.stringify(header)
+        );
+      });
+    });
+  });
 });

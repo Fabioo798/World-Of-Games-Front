@@ -38,8 +38,9 @@ describe('GameServicesService', () => {
         gameName: 'test',
         category: 'MMO',
         releaseDate: 'test',
+        description: 'test',
         img: '',
-        price: '25',
+        price: 25,
       } as Game;
 
       service.createGame(game).subscribe((result) => {
@@ -68,8 +69,9 @@ describe('GameServicesService', () => {
           gameName: 'test',
           category: 'MMO',
           releaseDate: 'test',
+          description: 'test',
           img: '',
-          price: '25',
+          price: 25,
         },
       ]);
     });
@@ -82,8 +84,9 @@ describe('GameServicesService', () => {
           gameName: 'test',
           category: 'MMO',
           releaseDate: 'test',
+          description: 'test',
           img: '',
-          price: '25',
+          price: 25,
         },
       ] as unknown as Game[];
 
@@ -106,21 +109,72 @@ describe('GameServicesService', () => {
       });
 
       const req = httpMock.expectOne(
-        `http://localhost:4800/games/?${category}`
+        `http://localhost:4800/games/filter/${category}`
       );
       expect(req.request.method).toEqual('GET');
-      req.flush([
-        {
-          id: 'test',
-          gameName: 'test',
-          category: 'MMO',
-          releaseDate: 'test',
-          img: '',
-          price: '25',
-        },
-      ]);
+      req.flush({
+        results: [
+          {
+            id: 'test',
+            gameName: 'test',
+            category: 'MMO',
+            releaseDate: 'test',
+            description: 'test',
+            img: '',
+            price: 25,
+          },
+        ],
+      });
+    });
+    it('should query Game data', () => {
+      const category = 'all';
+
+      service.queryGame(category).subscribe((games) => {
+        expect(games.length).toBeGreaterThan(0);
+      });
+
+      const req = httpMock.expectOne(`http://localhost:4800/games/`);
+      expect(req.request.method).toEqual('GET');
+      req.flush({
+        results: [
+          {
+            id: 'test',
+            gameName: 'test',
+            category: 'MMO',
+            releaseDate: 'test',
+            description: 'test',
+            img: '',
+            price: 25,
+          },
+        ],
+      });
     });
   });
+  // describe('queryGame with all', () => {
+  //   it('should query Game data', () => {
+  //     const category = 'all';
+
+  //     service.queryGame(category).subscribe((games) => {
+  //       expect(games.length).toBeGreaterThan(0);
+  //     });
+
+  //     const req = httpMock.expectOne(`http://localhost:4800/games/`);
+  //     expect(req.request.method).toEqual('GET');
+  //     req.flush({
+  //       results: [
+  //         {
+  //           id: 'test',
+  //           gameName: 'test',
+  //           category: 'MMO',
+  //           releaseDate: 'test',
+  //           description: 'test',
+  //           img: '',
+  //           price: 25,
+  //         },
+  //       ],
+  //     });
+  //   });
+  // });
 
   describe('updateGame', () => {
     it('should update Game data', () => {
@@ -130,15 +184,16 @@ describe('GameServicesService', () => {
         gameName: 'test',
         category: 'MMO',
         releaseDate: 'test',
+        description: 'test',
         img: '',
-        price: '25',
+        price: 25,
       } as Game;
 
       service.updateGame(id, game).subscribe((games) => {
         expect(games.length).toBeGreaterThan(0);
       });
 
-      const req = httpMock.expectOne(`http://localhost:4800/games/:${id}`);
+      const req = httpMock.expectOne(`http://localhost:4800/games/${id}`);
       expect(req.request.method).toEqual('PUT');
       req.flush([
         {
@@ -146,8 +201,9 @@ describe('GameServicesService', () => {
           gameName: 'test',
           category: 'MMO',
           releaseDate: 'test',
+          description: 'test',
           img: '',
-          price: '25',
+          price: 25,
         },
       ]);
     });
@@ -160,7 +216,7 @@ describe('GameServicesService', () => {
         expect(games.length).toBeGreaterThan(0);
       });
 
-      const req = httpMock.expectOne(`http://localhost:4800/games/:${id}`);
+      const req = httpMock.expectOne(`http://localhost:4800/games/${id}`);
       expect(req.request.method).toEqual('DELETE');
       req.flush([
         {
@@ -168,8 +224,9 @@ describe('GameServicesService', () => {
           gameName: 'test',
           category: 'MMO',
           releaseDate: 'test',
+          description: 'test',
           img: '',
-          price: '25',
+          price: 25,
         },
       ]);
     });
@@ -182,19 +239,21 @@ describe('GameServicesService', () => {
         gameName: 'test',
         category: 'MMO',
         releaseDate: 'test',
+        description: 'test',
         img: '',
-        price: '25',
+        price: 25,
       },
       {
-        id: 'test1',
-        gameName: 'test1',
+        id: 'test',
+        gameName: 'test',
         category: 'MMO',
         releaseDate: 'test',
+        description: 'test',
         img: '',
-        price: '25',
+        price: 25,
       },
     ] as unknown as Game[];
-
+    service._games$.next(testData);
     service.games$.subscribe((emittedGames) => {
       expect(emittedGames).toEqual(testData);
     });

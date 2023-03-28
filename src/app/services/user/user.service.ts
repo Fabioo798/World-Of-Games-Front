@@ -19,6 +19,7 @@ export class RepoUserService {
   token$: BehaviorSubject<string>;
   currentUser$: BehaviorSubject<User>;
   userLogged$: BehaviorSubject<LoggedUser>;
+  UserInfo$: any;
 
   constructor(private http: HttpClient) {
     const initialToken = '';

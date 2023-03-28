@@ -10,11 +10,13 @@ import { RepoUserService } from '../user/user.service';
 export class RepoGameService {
   public _games$: BehaviorSubject<Game[]>;
   token: Token;
+  gameInfo$: BehaviorSubject<Game>;
 
   constructor(public http: HttpClient, public srv: RepoUserService) {
     const initialGames: Game[] = [];
     this._games$ = new BehaviorSubject(initialGames);
     this.token = { results: { token: '' } };
+    this.gameInfo$ = new BehaviorSubject({} as Game);
   }
 
   public get games$(): Observable<Game[]> {
@@ -40,7 +42,6 @@ export class RepoGameService {
     return this.srv.token$.pipe(
       switchMap((token) => {
         const headers = { Authorization: `Bearer ${token}` }; // Add the token to headers
-        console.log(token);
         return this.http
           .get<{ results: Array<Game[]> }>('http://localhost:4800/games/', {
             headers: headers,
@@ -60,16 +61,15 @@ export class RepoGameService {
     return this.srv.token$.pipe(
       switchMap((token) => {
         const headers = { Authorization: `Bearer ${token}` }; // Add the token to headers
-        console.log(token);
-        console.log(category);
-        if (category === 'all') {
+        if (category === 'all' || category === '') {
           allGames = this.http.get<{ results: Array<Game[]> }>(
             'http://localhost:4800/games/',
             { headers: headers }
           );
         } else {
+          console.log(category);
           allGames = this.http.get<{ results: Array<Game[]> }>(
-            `http://localhost:4800/games/filter/:${category}`,
+            `http://localhost:4800/games/filter/${category}`,
             { headers: headers }
           );
         }
