@@ -17,7 +17,7 @@ export type Game = {
   category: gameCategory;
   releaseDate: string;
   img: string;
-  price: string;
+  price: number;
   owner?: Partial<User>;
   description: string;
 };

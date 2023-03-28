@@ -7,7 +7,7 @@ import { DetailComponent } from './game/detail/detail.component';
 import { GamesComponent } from './game/games/games.component';
 import { AddComponent } from './game/add/add.component';
 import { UserDetailComponent } from './user/detail/detail.component';
-import { EditComponent } from './user/edit/edit.component';
+// import { EditComponent } from './user/edit/edit.component';
 import { CartComponent } from './user/cart/cart.component';
 
 const routes: Routes = [
@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'user/:id', component: UserDetailComponent },
-  { path: 'edit', component: EditComponent },
+  // { path: 'edit', component: EditComponent },
   { path: 'games', component: GamesComponent },
   { path: 'games/:id', component: DetailComponent },
   { path: 'create', component: AddComponent },
