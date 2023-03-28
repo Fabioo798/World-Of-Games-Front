@@ -7,5 +7,3 @@ export type ServerLoginResponse = {
 export type ServerCompleteUserResponse = {
   results: User[];
 };
-
-
