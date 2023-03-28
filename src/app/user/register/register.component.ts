@@ -107,20 +107,20 @@ export class RegisterComponent {
     }
 
     observable1.subscribe({
-      next: (response: any) => {
-        console.log(response);
+      next: () => {
         this.isSuccess = true;
         setTimeout(() => {
           this.isSuccess = false;
           this.zone.run(() => {
-            if (this.isUpdate === true)
+            if (this.isUpdate === true) {
               this.router.navigate([`/user/:${this.userToUpdate!.id}`]);
-            this.router.navigate(['/login']);
+            } else {
+              this.router.navigate(['/login']);
+            }
           });
         }, 2000);
       },
-      error: (error: any) => {
-        console.log(error);
+      error: () => {
         this.isError = true;
         setTimeout(() => {
           this.isError = false;

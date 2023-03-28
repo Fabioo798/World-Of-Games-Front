@@ -29,6 +29,7 @@ import { provideFirebaseApp } from '@angular/fire/app';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
+import { UserDetailComponent } from '../detail/detail.component';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -44,6 +45,7 @@ describe('RegisterComponent', () => {
         HttpClientModule,
         RouterTestingModule.withRoutes([
           { path: 'login', component: RegisterComponent },
+          { path: 'user/:12345', component: UserDetailComponent },
         ]),
         provideFirebaseApp(() => initializeApp(environment.firebase)),
         provideStorage(() => getStorage()),
@@ -100,7 +102,7 @@ describe('RegisterComponent', () => {
       expect(spyZoneRun).toHaveBeenCalled();
       expect(component.isSuccess).toBeFalse();
       expect(component.isError).toBeFalse();
-      expect(component.router.url).toBe('/login');
+      expect(component.router.url).toBe(`/user/:${mockUser.id}`);
     }));
   });
 
@@ -126,8 +128,8 @@ describe('RegisterComponent', () => {
             ],
           },
         };
-        srv.currentUser$.next(null as unknown as User);
-        component.userToUpdate = null as any;
+        srv.currentUser$.next({} as unknown as User);
+        component.userToUpdate = {} as any;
         component.isUpdate = false;
         component.saveImage(mockEvent);
         const spyUpload = spyOn(component, 'uploadImage').and.resolveTo();
@@ -164,8 +166,8 @@ describe('RegisterComponent', () => {
             ],
           },
         };
-        srv.currentUser$.next(null as unknown as User);
-        component.userToUpdate = null as any;
+        srv.currentUser$.next({} as unknown as User);
+        component.userToUpdate = {} as any;
         component.saveImage(mockEvent);
         const spyUpload = spyOn(component, 'uploadImage').and.resolveTo();
         const spyGetImage = spyOn(component, 'getImage').and.resolveTo('mock');
