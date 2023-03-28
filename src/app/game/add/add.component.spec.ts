@@ -146,7 +146,7 @@ describe('AddComponent', () => {
       }));
     });
 
-    describe('When the createGame method returns an error', () => {
+    describe('(ERROR)When the createGame method returns an error', () => {
       it('Should display error message', fakeAsync(() => {
         component.newGame.value['gameName'] = 'TestName';
         component.newGame.value['releaseDate'] = 'TestReleaseDate';
@@ -166,6 +166,7 @@ describe('AddComponent', () => {
             ],
           },
         };
+        console.log('ciao');
         srv.gameInfo$.next(null as unknown as Game);
         component.gameToUpdate = null as any;
         component.saveImage(mockEvent);

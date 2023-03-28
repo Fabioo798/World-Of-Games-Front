@@ -73,8 +73,7 @@ export class AddComponent {
 
   ngOnInit() {
     this.gameToUpdate = this.srv.gameInfo$.value;
-    console.log(this.gameToUpdate !== {} as Game);
-    if (this.gameToUpdate !) {
+    if (this.gameToUpdate && this.gameToUpdate.id) {
       this.newGame.patchValue({
         gameName: this.gameToUpdate.gameName,
         releaseDate: this.gameToUpdate.releaseDate,
