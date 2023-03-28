@@ -1,9 +1,12 @@
-import { Component, OnDestroy, NgZone } from '@angular/core';
+import { Component, OnDestroy, NgZone, inject } from '@angular/core';
+import { Storage } from '@angular/fire/storage';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { RepoGameService } from 'src/app/services/game/game.services.service';
 import { RepoUserService } from 'src/app/services/user/user.service';
 import { Game, gameCategory, User } from 'src/app/types/types';
+import '@angular/fire/storage';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-games',
@@ -30,7 +33,9 @@ export class GamesComponent implements OnDestroy {
       if (token) {
         this.loadGames();
       } else {
-        console.log('not logged!');
+        this.zone.run(() => {
+          this.router.navigateByUrl('/home');
+        });
       }
     });
   }
@@ -43,9 +48,11 @@ export class GamesComponent implements OnDestroy {
     this.loadGames();
   }
 
-  private loadGames(): void {
+  loadGames(): void {
     this.gamesrv.queryGame(this.selectedCategory).subscribe((games) => {
-      this.games = games;
+      this.zone.run(() => {
+        this.games = games;
+      });
     });
   }
 
@@ -56,10 +63,8 @@ export class GamesComponent implements OnDestroy {
       const shopListIds = (user.shopList as Game[]).map(
         (game) => game.id
       ) as string[];
-      shopListIds.push(gameId)
-      console.log(shopListIds);
+      shopListIds.push(gameId);
       const updatedList: any = { shopList: shopListIds };
-      console.log(updatedList);
       this.srv.updateUser(userId, updatedList).subscribe(() => {
         this.zone.run(() => {
           this.router.navigateByUrl('/cart');

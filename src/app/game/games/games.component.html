@@ -13,8 +13,8 @@
 </div>
 
 <ul>
-  <li *ngFor="let game of gamesrv.games$ | async">
-    <a [routerLink]="game.id">
+<li *ngFor="let game of games">
+     <a [routerLink]="game.id">
       <div>
         <img class="game-img" [src]="game.img" alt="{{game.gameName}}">
         <p>
