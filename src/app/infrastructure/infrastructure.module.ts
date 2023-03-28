@@ -4,18 +4,22 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LayoutComponent } from './layout/layout.component';
 import { RouterModule } from '@angular/router';
-
+import { MenuComponent } from './menu/menu.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    LayoutComponent
+    LayoutComponent,
+    MenuComponent,
+
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    MatIconModule
   ],
   exports: [
     LayoutComponent

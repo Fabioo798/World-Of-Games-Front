@@ -24,7 +24,10 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -78,10 +81,14 @@
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
+            "codeCoverageExclude": ["/**/*routing.module.ts", "/**/utils/*.ts"],
             "inlineStyleLanguage": "scss",
             "codeCoverage": true,
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "src/styles.scss"
+            ],
             "scripts": []
           }
         }
