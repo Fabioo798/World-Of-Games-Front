@@ -22,7 +22,6 @@ export class FooterComponent implements OnInit {
       )
       .subscribe((event: NavigationEnd) => {
         this.currentPage = event.url;
-        console.log(this.currentPage);
       });
   }
 }

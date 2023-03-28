@@ -37,17 +37,17 @@ describe('FooterComponent', () => {
   it('should set currentPage when navigation ends', () => {
     const event = new NavigationEnd(0, '/', '/');
     routerEventsSubject.next(event);
-    fixture.detectChanges(); // update the component's bindings
+    fixture.detectChanges(); 
     expect(component.currentPage).toEqual('/');
 
     const event1 = new NavigationEnd(0, '/', '/');
     routerEventsSubject.next(event1);
-    fixture.detectChanges(); // update the component's bindings
+    fixture.detectChanges(); 
     expect(component.currentPage).toEqual('/');
 
     const aboutEvent = new NavigationEnd(1, '/about', '/about');
     routerEventsSubject.next(aboutEvent);
-    fixture.detectChanges(); // update the component's bindings
+    fixture.detectChanges(); 
     expect(component.currentPage).toEqual('/about');
   });
 });

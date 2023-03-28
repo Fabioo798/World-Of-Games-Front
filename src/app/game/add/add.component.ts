@@ -2,7 +2,6 @@ import {
   Component,
   EventEmitter,
   inject,
-  Input,
   NgZone,
   Output,
 } from '@angular/core';
@@ -129,8 +128,7 @@ export class AddComponent {
           });
         }, 2000);
       },
-      error: (error: any) => {
-        console.log(error);
+      error: () => {
         this.isError = true;
         setTimeout(() => {
           this.isError = false;

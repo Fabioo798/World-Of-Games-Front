@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { RepoGameService } from 'src/app/services/game/game.services.service';
 import { RepoUserService } from 'src/app/services/user/user.service';
-import { User } from 'src/app/types/types';
 import {
   mockUserService,
   mockGameService,

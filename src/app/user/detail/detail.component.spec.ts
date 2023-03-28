@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
-import { User } from 'src/app/types/types';
 import { RepoUserService } from 'src/app/services/user/user.service';
 
 import { UserDetailComponent } from './detail.component';
@@ -8,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import {
   mockGame,
   mockGameService,
-  mockLogged,
   mockRouteParam,
   mockUser,
   mockUserService,
@@ -24,7 +21,6 @@ describe('DetailComponent', () => {
   let fixture: ComponentFixture<UserDetailComponent>;
   let srv: RepoUserService;
   let gamesrv: RepoGameService;
-  let router: ActivatedRoute;
 
   beforeEach(() => {
     TestBed.configureTestingModule({

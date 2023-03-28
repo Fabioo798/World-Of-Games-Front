@@ -1,9 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { NgZone } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { Game, User } from 'src/app/types/types';
+import { of } from 'rxjs';
+import { Game } from 'src/app/types/types';
 import { GamesComponent } from './games.component';
 import { RepoGameService } from 'src/app/services/game/game.services.service';
 import { RepoUserService } from 'src/app/services/user/user.service';

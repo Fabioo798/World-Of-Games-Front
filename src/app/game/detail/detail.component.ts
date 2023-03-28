@@ -20,13 +20,10 @@ export class DetailComponent {
       this.games = t;
     });
     this.findGame();
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
   }
 
   findGame() {
     const found = this.games.find((game) => game.id === this.params['id']);
-    console.log(found);
     if (!found) return;
     this.game = found;
   }

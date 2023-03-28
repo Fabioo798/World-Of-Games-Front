@@ -54,19 +54,14 @@ describe('DetailComponent', () => {
   });
 
   it('should set game to found game if game is found', () => {
-    // Set up the component's games array
     component.games = [{ id: '123' }, { id: '456' }] as Game[];
-    // Call findGame() with a valid game ID
     component.params['id'] = '123';
     component.findGame();
     expect(component.game.id).toEqual('123');
   });
 
   it('should not set game if game is not found', () => {
-    // Set up the component's games array
     component.games = [{ id: '123' }, { id: '456' }] as unknown as Game[];
-    // Call findGame() with an invalid game ID
-    // Call findGame() with an invalid game ID
     component.params['id'] = '789';
     component.findGame();
     expect(component.game).toEqual({} as Game);

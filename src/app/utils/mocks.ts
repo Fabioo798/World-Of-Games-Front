@@ -1,5 +1,4 @@
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
-import { RepoGameService } from '../services/game/game.services.service';
 import { Game, LoggedUser, User } from '../types/types';
 
 export const mockPass = 'pass';

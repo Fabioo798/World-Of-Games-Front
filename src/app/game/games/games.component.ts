@@ -1,12 +1,10 @@
 import { Component, OnDestroy, NgZone, inject } from '@angular/core';
-import { Storage } from '@angular/fire/storage';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { RepoGameService } from 'src/app/services/game/game.services.service';
 import { RepoUserService } from 'src/app/services/user/user.service';
 import { Game, gameCategory, User } from 'src/app/types/types';
 import '@angular/fire/storage';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-games',

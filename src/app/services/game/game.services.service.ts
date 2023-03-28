@@ -67,7 +67,6 @@ export class RepoGameService {
             { headers: headers }
           );
         } else {
-          console.log(category);
           allGames = this.http.get<{ results: Array<Game[]> }>(
             `http://localhost:4800/games/filter/${category}`,
             { headers: headers }

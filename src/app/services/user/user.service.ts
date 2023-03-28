@@ -5,12 +5,10 @@ import {
   ServerCompleteUserResponse,
   ServerLoginResponse,
 } from 'src/app/types/server.response';
-import { LoggedUser, Login, Token, User } from 'src/app/types/types';
+import { LoggedUser, Login, User } from 'src/app/types/types';
 import * as jose from 'jose';
 
-export type apiAnswer = {
-  result: any;
-};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -45,7 +43,6 @@ export class RepoUserService {
     ).pipe(
       map((data: any) => {
         const token: string = data.results.token;
-        console.log(token);
         this.token$.next(token);
         localStorage.setItem('Token', token as string);
         const userInfo = jose.decodeJwt(token) as unknown as LoggedUser;

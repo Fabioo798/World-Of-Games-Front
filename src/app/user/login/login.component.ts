@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RepoUserService } from 'src/app/services/user/user.service';
-import { Login, User } from 'src/app/types/types';
+import { Login } from 'src/app/types/types';
 
 @Component({
   selector: 'app-login',
@@ -50,8 +50,7 @@ export class LoginComponent {
           });
         }, 2000);
       },
-      error: (error: any) => {
-        console.log(error);
+      error: () => {
         this.isError = true;
         setTimeout(() => {
           this.isError = false;

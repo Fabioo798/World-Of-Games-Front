@@ -1,5 +1,4 @@
 import { Component, NgZone } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { RepoGameService } from 'src/app/services/game/game.services.service';
 import { RepoUserService } from 'src/app/services/user/user.service';

@@ -16,10 +16,8 @@ import { RepoGameService } from 'src/app/services/game/game.services.service';
 import { Game } from 'src/app/types/types';
 import { UserDetailComponent } from 'src/app/user/detail/detail.component';
 import {
-  mockGame,
   mockGameService,
   mockGametoUp,
-  mockUser,
 } from 'src/app/utils/mocks';
 import { environment } from 'src/environments/environment';
 import { AddComponent } from './add.component';
@@ -28,8 +26,6 @@ describe('AddComponent', () => {
   let component: AddComponent;
   let fixture: ComponentFixture<AddComponent>;
   let srv: RepoGameService;
-  let mockActivatedRoute: any;
-  let gameToUpdate: any;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -166,7 +162,6 @@ describe('AddComponent', () => {
             ],
           },
         };
-        console.log('ciao');
         srv.gameInfo$.next(null as unknown as Game);
         component.gameToUpdate = null as any;
         component.saveImage(mockEvent);

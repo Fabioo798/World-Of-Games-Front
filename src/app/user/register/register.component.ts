@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, NgZone, Output } from '@angular/core';
+import { Component, inject, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   Storage,
@@ -94,12 +94,9 @@ export class RegisterComponent {
       password: this.newUser.value.password,
       img: avatar,
     };
-    console.log(this.isUpdate);
     if (this.isUpdate === false) {
-      console.log(sendNewUser);
       observable1 = this.srv.registerUser(sendNewUser);
     } else {
-      console.log(this.userToUpdate);
       observable1 = this.srv.updateUser(
         this.userToUpdate!.id as string,
         sendNewUser
