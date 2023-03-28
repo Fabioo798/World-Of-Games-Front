@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 import { MenuComponent } from '../menu/menu.component';
@@ -18,8 +18,9 @@ describe('LayoutComponent', () => {
         FooterComponent,
         HeaderComponent,
         MenuComponent,
+        ActivatedRoute,
       ],
-      imports: [MatIconModule, RouterLink],
+      imports: [MatIconModule, RouterLink, RouterModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LayoutComponent);
