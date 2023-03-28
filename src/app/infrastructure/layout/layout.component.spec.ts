@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatIconModule } from '@angular/material/icon';
-import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';

@@ -83,7 +83,7 @@ describe('GamesComponent', () => {
         { id: '1', gameName: 'Game 1', category: 'MMO' } as Game,
         { id: '2', gameName: 'Game 2', category: 'Action' } as Game,
       ];
-      const spyOnGame = spyOn(gamesrv, 'queryGame').and.returnValue(of(games));
+      spyOn(gamesrv, 'queryGame').and.returnValue(of(games));
 
       component.loadGames();
       expect(component.games).toEqual(games);

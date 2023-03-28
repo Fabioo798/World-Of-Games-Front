@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Game, LoggedUser, User } from '../types/types';
 
 export const mockPass = 'pass';
@@ -8,7 +8,7 @@ export const mockUser1: User = {
   email: 'johndoe@example.com',
   password: mockPass,
   img: '',
-  id: '123'
+  id: '123',
 };
 
 export const mockGame: Game = {
@@ -72,7 +72,7 @@ export const mockUserService = {
     return new Observable<User>();
   },
   updateUser: (id: string, user: User) => {
-    return new Observable<User>()
+    return new Observable<User>();
   },
   deleteUser: () => {
     return of({});
@@ -103,7 +103,7 @@ export const mockGameService = {
   },
 
   queryGame: (category: string) => {
-    return of([{} as Game])
+    return of([{} as Game]);
   },
 
   gameInfo$: new BehaviorSubject<Game>(mockGame),

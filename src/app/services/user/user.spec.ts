@@ -9,7 +9,7 @@ import {
   ServerCompleteUserResponse,
 } from 'src/app/types/server.response';
 import { Login } from 'src/app/types/types';
-import { mockToken, mockUser, mockUser1 } from 'src/app/utils/mocks';
+import { mockPass, mockToken, mockUser, mockUser1 } from 'src/app/utils/mocks';
 import { RepoUserService } from './user.service';
 
 describe('RepoUserService', () => {
@@ -35,7 +35,7 @@ describe('RepoUserService', () => {
       };
       const mockLogin: Login = {
         email: 'TestMail',
-        password: 'test',
+        password: mockPass,
       };
 
       const spyLocal = spyOn(localStorage, 'setItem').and.callThrough();
@@ -154,9 +154,7 @@ describe('RepoUserService', () => {
     describe('And there is no token$', () => {
       it('should not return the user from API', async () => {
         service.token$.next('TestToken');
-        const mockResp = {
-          results: mockUser1,
-        };
+
         const header = new HttpHeaders({
           ['Authorization']: `Bearer ${service.token$.value}`,
         });
@@ -181,9 +179,7 @@ describe('RepoUserService', () => {
     describe('And there is token$', () => {
       it('should return the user from API', async () => {
         service.token$.next('TestToken');
-        const mockResp = {
-          results: mockUser1,
-        };
+
         const header = new HttpHeaders({
           ['Authorization']: `Bearer ${service.token$.value}`,
         });

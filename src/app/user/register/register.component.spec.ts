@@ -12,7 +12,12 @@ import { RegisterComponent } from './register.component';
 import { RepoUserService } from 'src/app/services/user/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/types/types';
-import { mockRoute, mockUser, mockUserService } from './../../utils/mocks';
+import {
+  mockPass,
+  mockRoute,
+  mockUser,
+  mockUserService,
+} from './../../utils/mocks';
 import {
   getStorage,
   provideStorage,
@@ -66,7 +71,7 @@ describe('RegisterComponent', () => {
     it('Should call the RepoUserService service and next', fakeAsync(() => {
       component.newUser.value['name'] = 'TestName';
       component.newUser.value['email'] = 'TestReleaseDate';
-      component.newUser.value['password'] = 'TestCategory';
+      component.newUser.value['password'] = mockPass;
       component.newUser.value['img'] = 'TestImg';
       const spynewGame = spyOn(srv, 'updateUser').and.returnValue(of(mockUser));
       const spyZoneRun = spyOn(component.zone, 'run').and.callThrough();
@@ -105,7 +110,7 @@ describe('RegisterComponent', () => {
       it('Should call the RepoGameService service and next', fakeAsync(() => {
         component.newUser.value['name'] = 'TestName';
         component.newUser.value['email'] = 'TestReleaseDate';
-        component.newUser.value['password'] = 'TestCategory';
+        component.newUser.value['password'] = mockPass;
         component.newUser.value['img'] = 'TestImg';
         const spynewUser = spyOn(srv, 'registerUser').and.returnValue(
           of(mockUser)
@@ -142,12 +147,11 @@ describe('RegisterComponent', () => {
 
     describe('(ERROR)When the createUser method returns an error', () => {
       it('Should display error message', fakeAsync(() => {
-        component.newUser.value['UserName'] = 'TestName';
-        component.newUser.value['releaseDate'] = 'TestReleaseDate';
-        component.newUser.value['category'] = 'TestCategory';
-        component.newUser.value['price'] = 'TestPrice';
-        component.newUser.value['description'] = 'TestDescription';
+        component.newUser.value['name'] = 'TestName';
+        component.newUser.value['email'] = 'TestReleaseDate';
+        component.newUser.value['password'] = mockPass;
         component.newUser.value['img'] = 'TestImg';
+
         spyOn(srv, 'registerUser').and.returnValue(throwError(() => 'error'));
         const mockEvent = {
           target: {
@@ -177,12 +181,11 @@ describe('RegisterComponent', () => {
     });
     describe('(ERROR)When the updateUser method returns an error', () => {
       it('Should display error message', fakeAsync(() => {
-        component.newUser.value['UserName'] = 'TestName';
-        component.newUser.value['releaseDate'] = 'TestReleaseDate';
-        component.newUser.value['category'] = 'TestCategory';
-        component.newUser.value['price'] = 'TestPrice';
-        component.newUser.value['description'] = 'TestDescription';
+        component.newUser.value['name'] = 'TestName';
+        component.newUser.value['email'] = 'TestReleaseDate';
+        component.newUser.value['password'] = mockPass;
         component.newUser.value['img'] = 'TestImg';
+
         spyOn(srv, 'updateUser').and.returnValue(throwError(() => 'error'));
         const mockEvent = {
           target: {

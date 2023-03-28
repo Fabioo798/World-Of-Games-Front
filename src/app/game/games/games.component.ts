@@ -1,4 +1,4 @@
-import { Component, OnDestroy, NgZone, inject } from '@angular/core';
+import { Component, OnDestroy, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { RepoGameService } from 'src/app/services/game/game.services.service';

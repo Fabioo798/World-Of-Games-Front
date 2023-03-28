@@ -10,7 +10,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of, throwError } from 'rxjs';
 import { GamesComponent } from 'src/app/game/games/games.component';
 import { RepoUserService } from 'src/app/services/user/user.service';
-import { mockUserService, mockToken } from 'src/app/utils/mocks';
+import { mockUserService, mockToken, mockPass } from 'src/app/utils/mocks';
 import { LoginComponent } from './login.component';
 
 describe('LoginComponent', () => {
@@ -50,7 +50,7 @@ describe('LoginComponent', () => {
     describe('When called with correct data', () => {
       it('Should call the users login service and next', fakeAsync(() => {
         component.login.value['email'] = 'TestMail';
-        component.login.value['password'] = 'TestPass';
+        component.login.value['password'] = mockPass;
         const spyLogin = spyOn(srv, 'loginUser').and.returnValue(of(mockToken));
         const spyZoneRun = spyOn(component.zone, 'run').and.callThrough();
         component.handleSubmit();
