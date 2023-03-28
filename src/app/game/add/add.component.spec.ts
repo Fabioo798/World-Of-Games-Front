@@ -15,10 +15,7 @@ import { of, throwError } from 'rxjs';
 import { RepoGameService } from 'src/app/services/game/game.services.service';
 import { Game } from 'src/app/types/types';
 import { UserDetailComponent } from 'src/app/user/detail/detail.component';
-import {
-  mockGameService,
-  mockGametoUp,
-} from 'src/app/utils/mocks';
+import { mockGameService, mockGametoUp } from 'src/app/utils/mocks';
 import { environment } from 'src/environments/environment';
 import { AddComponent } from './add.component';
 
