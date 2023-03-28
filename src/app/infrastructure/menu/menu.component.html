@@ -1,6 +1,15 @@
 <nav>
   <ul>
-    <li *ngFor="let bt of btns">
+    <li class="left-section" *ngFor="let bt of btns.slice(0, 2)">
+      <a [routerLink]="bt.path">
+        <mat-icon>{{ bt.icon }}</mat-icon>
+        {{ bt.label }}
+      </a>
+    </li>
+    <li class="logo">
+      <img src="./../../../assets/menu-logo.png" alt="Logo">
+    </li>
+    <li class="right-section" *ngFor="let bt of btns.slice(2, 4)">
       <a [routerLink]="bt.path">
         <mat-icon>{{ bt.icon }}</mat-icon>
         {{ bt.label }}

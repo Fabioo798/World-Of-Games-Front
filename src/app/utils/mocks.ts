@@ -1,5 +1,11 @@
+import { HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { Game, LoggedUser, User } from '../types/types';
+import { RepoUserService } from '../services/user/user.service';
+import {
+  ServerCompleteUserResponse,
+  ServerLoginResponse,
+} from '../types/server.response';
+import { Game, LoggedUser, Login, User } from '../types/types';
 
 export const mockPass = 'pass';
 
@@ -119,3 +125,11 @@ export const mockGametoUp = {
   description: 'Test description',
   img: 'test.png',
 } as unknown as Game;
+
+export const mockLogin: Login = {
+  email: 'TestMail',
+  password: mockPass,
+};
+export const mockResp1: ServerCompleteUserResponse = {
+  results: [mockUser],
+};

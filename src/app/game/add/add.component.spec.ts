@@ -51,6 +51,12 @@ describe('AddComponent', () => {
     srv = TestBed.inject(RepoGameService);
     component.gameToUpdate = {} as unknown as Game;
     fixture.detectChanges();
+    component.newGame.value['gameName'] = 'TestName';
+    component.newGame.value['releaseDate'] = 'TestReleaseDate';
+    component.newGame.value['category'] = 'TestCategory';
+    component.newGame.value['price'] = 20;
+    component.newGame.value['description'] = 'TestDescription';
+    component.newGame.value['img'] = 'TestImg';
   });
 
   it('should create', () => {
@@ -59,12 +65,12 @@ describe('AddComponent', () => {
 
   describe('(UPDATE)When we have a game to update', () => {
     it('Should call the RepoGameService service and next', fakeAsync(() => {
-      component.newGame.value['gameName'] = 'TestName';
-      component.newGame.value['releaseDate'] = 'TestReleaseDate';
-      component.newGame.value['category'] = 'TestCategory';
-      component.newGame.value['price'] = 20;
-      component.newGame.value['description'] = 'TestDescription';
-      component.newGame.value['img'] = 'TestImg';
+      // component.newGame.value['gameName'] = 'TestName';
+      // component.newGame.value['releaseDate'] = 'TestReleaseDate';
+      // component.newGame.value['category'] = 'TestCategory';
+      // component.newGame.value['price'] = 20;
+      // component.newGame.value['description'] = 'TestDescription';
+      // component.newGame.value['img'] = 'TestImg';
       const spynewGame = spyOn(srv, 'updateGame').and.returnValue(
         of(mockGametoUp)
       );
@@ -98,14 +104,8 @@ describe('AddComponent', () => {
     }));
   });
   describe('(CREATE)Given the handleSubmit method', () => {
-    describe('When called with correct data', () => {
+    describe('When called with correct data to create a game', () => {
       it('Should call the RepoGameService service and next', fakeAsync(() => {
-        component.newGame.value['gameName'] = 'TestName';
-        component.newGame.value['releaseDate'] = 'TestReleaseDate';
-        component.newGame.value['category'] = 'TestCategory';
-        component.newGame.value['price'] = 20;
-        component.newGame.value['description'] = 'TestDescription';
-        component.newGame.value['img'] = 'TestImg';
         const spynewGame = spyOn(srv, 'createGame').and.returnValue(
           of(mockGametoUp)
         );
@@ -121,7 +121,6 @@ describe('AddComponent', () => {
             ],
           },
         };
-        debugger;
         srv.gameInfo$.next({} as unknown as Game);
         component.gameToUpdate = {} as any;
         component.saveImage(mockEvent);
@@ -141,12 +140,6 @@ describe('AddComponent', () => {
 
     describe('(ERROR)When the createGame method returns an error', () => {
       it('Should display error message', fakeAsync(() => {
-        component.newGame.value['gameName'] = 'TestName';
-        component.newGame.value['releaseDate'] = 'TestReleaseDate';
-        component.newGame.value['category'] = 'TestCategory';
-        component.newGame.value['price'] = 'TestPrice';
-        component.newGame.value['description'] = 'TestDescription';
-        component.newGame.value['img'] = 'TestImg';
         spyOn(srv, 'createGame').and.returnValue(throwError(() => 'error'));
         const mockEvent = {
           target: {

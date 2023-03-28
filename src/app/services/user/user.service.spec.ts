@@ -9,7 +9,14 @@ import {
   ServerCompleteUserResponse,
 } from 'src/app/types/server.response';
 import { Login } from 'src/app/types/types';
-import { mockPass, mockToken, mockUser, mockUser1 } from 'src/app/utils/mocks';
+import {
+  mockLogin,
+  mockPass,
+  mockResp1,
+  mockToken,
+  mockUser,
+  mockUser1,
+} from 'src/app/utils/mocks';
 import { RepoUserService } from './user.service';
 
 describe('RepoUserService', () => {
@@ -28,16 +35,14 @@ describe('RepoUserService', () => {
     expect(service).toBeTruthy();
   });
 
+  const mockResp: ServerLoginResponse = {
+    results: { token: mockToken },
+  };
+
+
+
   describe('When the login method is called', () => {
     it('Then it should return the token', () => {
-      const mockResp: ServerLoginResponse = {
-        results: { token: mockToken },
-      };
-      const mockLogin: Login = {
-        email: 'TestMail',
-        password: mockPass,
-      };
-
       const spyLocal = spyOn(localStorage, 'setItem').and.callThrough();
       const spyNext = spyOn(service.token$, 'next').and.callThrough();
 
@@ -85,9 +90,7 @@ describe('RepoUserService', () => {
     describe('And there is no token$', () => {
       it('should not return the user from API', async () => {
         service.token$.next('');
-        const mockResp: ServerCompleteUserResponse = {
-          results: [mockUser],
-        };
+
         const header = new HttpHeaders({
           ['Authorization']: `Bearer ${service.token$.value}`,
         });
@@ -99,7 +102,7 @@ describe('RepoUserService', () => {
         const req = httpTestingController.expectOne(
           'http://localhost:4800/users/12345'
         );
-        req.flush(mockResp);
+        req.flush(mockResp1);
 
         expect(req.request.method).toEqual('GET');
         expect(JSON.stringify(req.request.headers)).toBe(
@@ -111,9 +114,7 @@ describe('RepoUserService', () => {
     describe('And there is a token$', () => {
       it('should return the user from API', async () => {
         service.token$.next('TestToken');
-        const mockResp: ServerCompleteUserResponse = {
-          results: [mockUser],
-        };
+
         const header = new HttpHeaders({
           ['Authorization']: `Bearer ${service.token$.value}`,
         });
@@ -125,7 +126,7 @@ describe('RepoUserService', () => {
         const req = httpTestingController.expectOne(
           'http://localhost:4800/users/12345'
         );
-        req.flush(mockResp);
+        req.flush(mockResp1);
 
         expect(req.request.method).toEqual('GET');
         expect(JSON.stringify(req.request.headers)).toBe(
@@ -149,54 +150,55 @@ describe('RepoUserService', () => {
       expect(req.request.method).toEqual('POST');
     });
   });
+  describe('Given the update and delete method', () => {
+    describe('When the updateUser method is called', () => {
+      describe('And there is no token$', () => {
+        it('should not return the user from API', async () => {
+          service.token$.next('TestToken');
+          const header = new HttpHeaders({
+            ['Authorization']: `Bearer ${service.token$.value}`,
+          });
 
-  describe('When the updateUser method is called', () => {
-    describe('And there is no token$', () => {
-      it('should not return the user from API', async () => {
-        service.token$.next('TestToken');
+          service.updateUser('123', mockUser1).subscribe((resp) => {
+            expect(resp).not.toBeNull();
+            expect(JSON.stringify(resp)).toBe(JSON.stringify(mockUser1));
+          });
+          expect(httpTestingController).toBeTruthy();
+          const req = httpTestingController.expectOne(
+            'http://localhost:4800/users/123'
+          );
+          req.flush(mockUser1);
 
-        const header = new HttpHeaders({
-          ['Authorization']: `Bearer ${service.token$.value}`,
+          expect(req.request.method).toEqual('PUT');
+          expect(JSON.stringify(req.request.headers)).toBe(
+            JSON.stringify(header)
+          );
         });
-        service.updateUser('123', mockUser1).subscribe((resp) => {
-          expect(resp).not.toBeNull();
-          expect(JSON.stringify(resp)).toBe(JSON.stringify(mockUser1));
-        });
-        expect(httpTestingController).toBeTruthy();
-        const req = httpTestingController.expectOne(
-          'http://localhost:4800/users/123'
-        );
-        req.flush(mockUser1);
-
-        expect(req.request.method).toEqual('PUT');
-        expect(JSON.stringify(req.request.headers)).toBe(
-          JSON.stringify(header)
-        );
       });
     });
-  });
-  describe('When the deleteUser method is called', () => {
-    describe('And there is token$', () => {
-      it('should return the user from API', async () => {
-        service.token$.next('TestToken');
+    describe('When the deleteUser method is called', () => {
+      describe('And there is token$', () => {
+        it('should return the user from API', async () => {
+          service.token$.next('TestToken');
 
-        const header = new HttpHeaders({
-          ['Authorization']: `Bearer ${service.token$.value}`,
-        });
-        service.deleteUser('123').subscribe((resp) => {
-          expect(resp).not.toBeNull();
-          expect(JSON.stringify(resp)).toBe(JSON.stringify(mockUser1));
-        });
-        expect(httpTestingController).toBeTruthy();
-        const req = httpTestingController.expectOne(
-          'http://localhost:4800/users/123'
-        );
-        req.flush(mockUser1);
+          const header = new HttpHeaders({
+            ['Authorization']: `Bearer ${service.token$.value}`,
+          });
+          service.deleteUser('123').subscribe((resp) => {
+            expect(resp).not.toBeNull();
+            expect(JSON.stringify(resp)).toBe(JSON.stringify(mockUser1));
+          });
+          expect(httpTestingController).toBeTruthy();
+          const req = httpTestingController.expectOne(
+            'http://localhost:4800/users/123'
+          );
+          req.flush(mockUser1);
 
-        expect(req.request.method).toEqual('DELETE');
-        expect(JSON.stringify(req.request.headers)).toBe(
-          JSON.stringify(header)
-        );
+          expect(req.request.method).toEqual('DELETE');
+          expect(JSON.stringify(req.request.headers)).toBe(
+            JSON.stringify(header)
+          );
+        });
       });
     });
   });

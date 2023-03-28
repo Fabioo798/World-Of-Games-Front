@@ -61,6 +61,11 @@ describe('RegisterComponent', () => {
     srv = TestBed.inject(RepoUserService);
     component.userToUpdate = {} as unknown as User;
     fixture.detectChanges();
+
+    component.newUser.value['name'] = 'TestName';
+    component.newUser.value['email'] = 'TestReleaseDate';
+    component.newUser.value['password'] = mockPass;
+    component.newUser.value['img'] = '';
   });
 
   it('should create', () => {
@@ -69,10 +74,6 @@ describe('RegisterComponent', () => {
 
   describe('When we have a game to update', () => {
     it('Should call the RepoUserService service and next', fakeAsync(() => {
-      component.newUser.value['name'] = 'TestName';
-      component.newUser.value['email'] = 'TestReleaseDate';
-      component.newUser.value['password'] = mockPass;
-      component.newUser.value['img'] = 'TestImg';
       const spynewGame = spyOn(srv, 'updateUser').and.returnValue(of(mockUser));
       const spyZoneRun = spyOn(component.zone, 'run').and.callThrough();
       const mockEvent = {
@@ -108,10 +109,6 @@ describe('RegisterComponent', () => {
   describe('Given the handleSubmit method', () => {
     describe('When called with correct data', () => {
       it('Should call the RepoGameService service and next', fakeAsync(() => {
-        component.newUser.value['name'] = 'TestName';
-        component.newUser.value['email'] = 'TestReleaseDate';
-        component.newUser.value['password'] = mockPass;
-        component.newUser.value['img'] = 'TestImg';
         const spynewUser = spyOn(srv, 'registerUser').and.returnValue(
           of(mockUser)
         );
@@ -147,11 +144,6 @@ describe('RegisterComponent', () => {
 
     describe('(ERROR)When the createUser method returns an error', () => {
       it('Should display error message', fakeAsync(() => {
-        component.newUser.value['name'] = 'TestName';
-        component.newUser.value['email'] = 'TestReleaseDate';
-        component.newUser.value['password'] = mockPass;
-        component.newUser.value['img'] = 'TestImg';
-
         spyOn(srv, 'registerUser').and.returnValue(throwError(() => 'error'));
         const mockEvent = {
           target: {
@@ -181,11 +173,6 @@ describe('RegisterComponent', () => {
     });
     describe('(ERROR)When the updateUser method returns an error', () => {
       it('Should display error message', fakeAsync(() => {
-        component.newUser.value['name'] = 'TestName';
-        component.newUser.value['email'] = 'TestReleaseDate';
-        component.newUser.value['password'] = mockPass;
-        component.newUser.value['img'] = 'TestImg';
-
         spyOn(srv, 'updateUser').and.returnValue(throwError(() => 'error'));
         const mockEvent = {
           target: {

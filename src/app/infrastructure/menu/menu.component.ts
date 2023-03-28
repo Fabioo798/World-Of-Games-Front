@@ -13,7 +13,6 @@ export class MenuComponent {
       { path: 'games', label: 'Home', icon: 'home-solid' },
       { path: 'cart', label: 'cart', icon: 'shopping_cart' },
       { path: 'create', label: 'Add', icon: 'add_circle_outline' },
-      { path: 'mygames', label: 'mygames', icon: 'games-svgrepo-com' },
       { path: 'user/:id', label: 'account', icon: 'person' },
     ];
   }
