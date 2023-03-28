@@ -15,7 +15,6 @@ export class CartComponent {
 
   constructor(
     private srv: RepoUserService,
-    private router: Router,
     public gamesrv: RepoGameService,
     public zone: NgZone
   ) {
@@ -27,7 +26,6 @@ export class CartComponent {
       const shopListIds = (user.shopList as Game[]).map(
         (game) => game.id
       ) as string[];
-      console.log(shopListIds);
       const index = shopListIds.findIndex((id) => id === game.id);
       if (index !== -1) {
         shopListIds.splice(index, 1);
@@ -35,7 +33,7 @@ export class CartComponent {
         const updatedList: any = { shopList: shopListIds };
         this.srv.updateUser(userId, updatedList).subscribe(() => {
           this.zone.run(() => {
-            // Optionally, you could show a success message here
+              this.currentUser$ = this.srv.getCurrentUser(this.srv.userLogged$.value.id);
           });
         });
       }
