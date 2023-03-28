@@ -13,18 +13,25 @@ import { RepoGameService } from 'src/app/services/game/game.services.service';
 export class UserDetailComponent {
   currentUser$: Observable<User>;
 
-  constructor(private srv: RepoUserService, private router: Router, public gamesrv: RepoGameService, public zone: NgZone ) {
-
+  constructor(
+    private srv: RepoUserService,
+    public router: Router,
+    public gamesrv: RepoGameService,
+    public zone: NgZone
+  ) {
     this.currentUser$ = this.srv.getCurrentUser(this.srv.userLogged$.value.id);
   }
 
   editGame(game: Game) {
-    const gameJson = JSON.stringify(game);
-    this.router.navigate(['create', { gameToUpdate: gameJson }]);
+    this.gamesrv.gameInfo$.next(game);
+    this.zone.run(() => {
+    this.router.navigate(['create']);
+    })
   }
-  editUser(user: User) {
-    const userJson = JSON.stringify(user);
-    this.router.navigate(['edit', { userToUpdate: userJson }]);
+  editUser() {
+    this.zone.run(() => {
+      this.router.navigate(['register']);
+    });
   }
 
   deleteGame(game: Partial<Game>) {
@@ -40,7 +47,6 @@ export class UserDetailComponent {
       this.zone.run(() => {
         this.router.navigate(['/home/']);
       });
-
     });
   }
 }
