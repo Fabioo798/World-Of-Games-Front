@@ -112,6 +112,7 @@ export const mockGameService = {
 };
 
 export const mockGametoUp = {
+  id: '123456',
   gameName: 'Test Game',
   releaseDate: '2022-01-01',
   category: 'Action',
