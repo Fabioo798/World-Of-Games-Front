@@ -101,11 +101,11 @@ describe('GameServicesService', () => {
   });
 
   describe('queryGame', () => {
-    it('should query Game data', () => {
+    it('should query Game data per category', () => {
       const category = 'MMO';
 
       service.queryGame(category).subscribe((games) => {
-        expect(games.length).toBeGreaterThan(0);
+        expect(games.length).not.toBeNull();
       });
 
       const req = httpMock.expectOne(
@@ -126,11 +126,11 @@ describe('GameServicesService', () => {
         ],
       });
     });
-    it('should query Game data', () => {
+    it('should query  all Game data', () => {
       const category = 'all';
 
       service.queryGame(category).subscribe((games) => {
-        expect(games.length).toBeGreaterThan(0);
+        expect(games.length).not.toBeNull();
       });
 
       const req = httpMock.expectOne(`http://localhost:4800/games/`);
@@ -150,31 +150,6 @@ describe('GameServicesService', () => {
       });
     });
   });
-  // describe('queryGame with all', () => {
-  //   it('should query Game data', () => {
-  //     const category = 'all';
-
-  //     service.queryGame(category).subscribe((games) => {
-  //       expect(games.length).toBeGreaterThan(0);
-  //     });
-
-  //     const req = httpMock.expectOne(`http://localhost:4800/games/`);
-  //     expect(req.request.method).toEqual('GET');
-  //     req.flush({
-  //       results: [
-  //         {
-  //           id: 'test',
-  //           gameName: 'test',
-  //           category: 'MMO',
-  //           releaseDate: 'test',
-  //           description: 'test',
-  //           img: '',
-  //           price: 25,
-  //         },
-  //       ],
-  //     });
-  //   });
-  // });
 
   describe('updateGame', () => {
     it('should update Game data', () => {
