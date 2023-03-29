@@ -1,23 +1,53 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { Router, NavigationEnd } from '@angular/router';
 import { FooterComponent } from './footer.component';
+import { Subject } from 'rxjs';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
   let fixture: ComponentFixture<FooterComponent>;
+  let router: Router;
+  let routerEventsSubject: Subject<any>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ FooterComponent ]
-    })
-    .compileComponents();
+    routerEventsSubject = new Subject<any>();
+
+    TestBed.configureTestingModule({
+      declarations: [FooterComponent],
+      providers: [
+        {
+          provide: Router,
+          useValue: {
+            events: routerEventsSubject.asObservable(),
+          },
+        },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    router = TestBed.inject(Router);
   });
 
   it('should create', () => {
+    fixture.detectChanges();
     expect(component).toBeTruthy();
+  });
+
+  it('should set currentPage when navigation ends', () => {
+    const event = new NavigationEnd(0, '/', '/');
+    routerEventsSubject.next(event);
+    fixture.detectChanges();
+    expect(component.currentPage).toEqual('/');
+
+    const event1 = new NavigationEnd(0, '/', '/');
+    routerEventsSubject.next(event1);
+    fixture.detectChanges();
+    expect(component.currentPage).toEqual('/');
+
+    const aboutEvent = new NavigationEnd(1, '/about', '/about');
+    routerEventsSubject.next(aboutEvent);
+    fixture.detectChanges();
+    expect(component.currentPage).toEqual('/about');
   });
 });

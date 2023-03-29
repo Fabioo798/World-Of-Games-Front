@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Output, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User, RepoUserService } from 'src/app/services/user/user.service';
+import { RepoUserService } from 'src/app/services/user/user.service';
+import { Login } from 'src/app/types/types';
 
 @Component({
   selector: 'app-login',
@@ -11,69 +12,54 @@ import { User, RepoUserService } from 'src/app/services/user/user.service';
 export class LoginComponent {
   login: FormGroup;
   @Output() onAdd: EventEmitter<string>;
-  token: string;
-  isLoading: boolean;
   isSuccess: boolean;
   isError: boolean;
   constructor(
     public form: FormBuilder,
     public srv: RepoUserService,
     public router: Router,
-    private zone: NgZone
+    public zone: NgZone
   ) {
     this.onAdd = new EventEmitter();
     this.login = form.group({
       email: '',
       password: '',
     });
-    this.token = '';
-    this.isLoading = false;
     this.isSuccess = false;
     this.isError = false;
   }
 
+  async ngOnInit(): Promise<void> {
+    this.srv.token$.subscribe();
+  }
+
   handleSubmit() {
-    debugger;
-    const sendLogUser: Partial<User> = {
+    const sendLogUser: Login = {
       email: this.login.value.email,
       password: this.login.value.password,
     };
-    console.log(sendLogUser);
-    console.log(this.srv);
     this.srv.loginUser(sendLogUser).subscribe({
       next: (response: any) => {
-        console.log(response);
-        console.log('user logged');
-        this.token = response.results.token; // Store the token
-        this.onAdd.emit(this.token);
-        console.log('Token:', this.token);
-        localStorage.setItem('token', this.token); // Save the token to the local storage
         this.isSuccess = true;
+        this.srv.token$.next(response);
+
         setTimeout(() => {
           this.isSuccess = false;
           this.zone.run(() => {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/games/']);
           });
         }, 2000);
       },
-      error: (error: any) => {
-        console.log(error);
-        this.isLoading = false;
+      error: () => {
         this.isError = true;
         setTimeout(() => {
           this.isError = false;
         }, 2000);
       },
+
       complete: () => {
         this.login.reset();
       },
     });
   }
-
-  // loadUsers() {
-  //   const headers = { Authorization: `Bearer ${this.token}` };
-  //   this.srv.loadUser(headers).subscribe((users: User[]) => {
-  //     console.log('Users:', users);
-  //   });
-  // }
 }

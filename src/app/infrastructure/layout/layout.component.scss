@@ -1,15 +1,48 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .header {
-  width: 100vh;
-  height: 10vh;
+  height: 150px;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
 }
 
 main {
-  position: absolute;
-  width: 100vh;
-  height: 160vh;
+  flex: 1;
+  padding-top: 44px;
+  padding-bottom: 56px;
+  margin: 0;
+  margin-top: 100px;
+  height: 100%;
+
+  app-games {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
+app-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .footer {
-  width: 100vh;
-  height: 10vh;
+  height: 150px;
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.margin {
+  display: flex;
+  flex-direction: column;
 }

@@ -9,19 +9,16 @@
     <label for="email">Email:</label>
     <input type="email" formControlName="email">
   </div>
-  <div class="form-group">
+  <div class="form-group" *ngIf="!this.isUpdate">
     <label for="password">Password:</label>
     <input type="password" formControlName="password">
   </div>
   <div class="form-group">
     <label for="img">Upload image</label>
-    <input type="file" formControlName="img">
+    <input type="file" formControlName="img" (change)="saveImage($event)">
   </div>
-  <button type="submit" [disabled]="isLoading">{{ isLoading ? 'Loading...' : 'Register' }}</button>
-  <p *ngIf="isSuccess">You are registered successfully!</p>
-  <div class="error" *ngIf="isError">Error during registration</div>
+  <button type="submit" *ngIf="!isUpdate">Register</button>
+  <button type="submit" *ngIf="isUpdate">Save</button>
+  <p *ngIf="isSuccess">You have successfully {{isUpdate ? 'updated your data!' : 'register!'}}</p>
+  <div class="error" *ngIf="isError">{{isUpdate ? 'Error during user update' : 'Error during registration'}}</div>
 </form>
-
-<div class="text">
-  <p>You already have an account? <span routerLink="/login">Login</span></p>
-</div>

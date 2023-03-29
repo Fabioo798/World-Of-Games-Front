@@ -1,0 +1,38 @@
+<img class="background" alt="home-background" class="image" src="./../../../assets/backgroun2.jpg">
+
+<form class="register-form" [formGroup]="newGame" (ngSubmit)="handleSubmit()">
+  <div class="form-group">
+    <label for="name">Game name:</label>
+    <input type="text" formControlName="gameName">
+  </div>
+  <div class="form-group">
+    <label for="Release date">Release date:</label>
+    <input type="text" formControlName="releaseDate">
+  </div>
+  <div class="form-group">
+    <label for="category">Category:</label>
+    <select formControlName="category">
+      <option value="MOBA">MOBA</option>
+      <option value="RPG">RPG</option>
+      <option value="MMO">MMO</option>
+      <option value="FPS">FPS</option>
+      <option value="Action">Action</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="price">Price:</label>
+    <input type="number" formControlName="price">
+  </div>
+  <div class="form-group">
+    <label for="img">Upload image</label>
+    <input type="file" formControlName="img" (change)="saveImage($event)">
+  </div>
+  <div class="form-group">
+    <label for="Description">Description:</label>
+    <input type="text" formControlName="description">
+  </div>
+  <button type="submit" *ngIf="!isUpdate">Create</button>
+  <button type="submit" *ngIf="isUpdate">Save</button>
+  <p *ngIf="isSuccess">You have successfully {{isUpdate ? 'updated' : 'created'}} the game!</p>
+  <div class="error" *ngIf="isError">{{isUpdate ? 'Error during game update' : 'Error during game creation'}}</div>
+</form>
