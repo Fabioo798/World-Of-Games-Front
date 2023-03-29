@@ -1,9 +1,6 @@
-import { HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { RepoUserService } from '../services/user/user.service';
 import {
-  ServerCompleteUserResponse,
-  ServerLoginResponse,
+  ServerCompleteUserResponse, ServerLoginResponse,
 } from '../types/server.response';
 import { Game, LoggedUser, Login, User } from '../types/types';
 
@@ -133,3 +130,67 @@ export const mockLogin: Login = {
 export const mockResp1: ServerCompleteUserResponse = {
   results: [mockUser],
 };
+
+export const mockEvent = {
+  target: {
+    files: [
+      {
+        name: 'test',
+        size: 0,
+        type: 'image/png',
+      },
+    ],
+  },
+};
+
+export const mockResp: ServerLoginResponse = {
+  results: { token: mockToken },
+};
+
+
+export const reqFlush = {
+  results: [
+    {
+      id: 'test',
+      gameName: 'test',
+      category: 'MMO',
+      releaseDate: 'test',
+      description: 'test',
+      img: '',
+      price: 25,
+    },
+  ],
+};
+
+export const gameBl = {
+  id: 'test',
+  gameName: 'test',
+  category: 'MMO',
+  releaseDate: 'test',
+  description: 'test',
+  img: '',
+  price: 25,
+} as Game;
+
+export const id = 'test';
+
+export const mockTestData = [
+  {
+    id: 'test',
+    gameName: 'test',
+    category: 'MMO',
+    releaseDate: 'test',
+    description: 'test',
+    img: '',
+    price: 25,
+  },
+  {
+    id: 'test',
+    gameName: 'test',
+    category: 'MMO',
+    releaseDate: 'test',
+    description: 'test',
+    img: '',
+    price: 25,
+  },
+] as unknown as Game[];

@@ -93,7 +93,7 @@ export class AddComponent {
     if (this.gameImg.name) {
       const avatarRef = ref(
         this.storage,
-        `avatars/${this.newGame.value.email}`
+        `games/${this.newGame.value.gameName}`
       );
 
       await this.uploadImage(avatarRef, this.gameImg);

@@ -1,8 +1,8 @@
 <img alt="home-background" class="image" src="./../../../assets/background3.png">
 
-<div>
+<div class="game-category">
   <label for="category-select">Filter by category:</label>
-<select id="category-select" [(ngModel)]="selectedCategory" (ngModelChange)="onCategorySelect()">
+  <select id="category-select" [(ngModel)]="selectedCategory" (ngModelChange)="onCategorySelect()">
     <option value="">All</option>
     <option value="MOBA">MOBA</option>
     <option value="RPG">RPG</option>
@@ -13,19 +13,15 @@
 </div>
 
 <ul>
-<li *ngFor="let game of games">
+  <li *ngFor="let game of games">
     <a [routerLink]="game.id">
-      <div>
+      <div class="game-card">
         <img class="game-img" [src]="game.img" alt="{{game.gameName}}">
-        <p>
-          {{ game.gameName }}
-        </p>
-        <p>
-          {{ game.category }}
-        </p>
-        <p>
-          {{ game.price }}
-        </p>
+      </div>
+      <div class="game-info">
+        <p class="game-name">{{ game.gameName }}</p>
+        <p class="game-category">{{ game.category }}</p>
+        <p class="game-price">{{ game.price }}€</p>
       </div>
     </a>
     <mat-icon (click)="addCart(game)">shopping_cart</mat-icon>

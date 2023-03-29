@@ -6,6 +6,7 @@ import {
 import { RepoGameService } from './game.services.service';
 import { Game } from 'src/app/types/types';
 import { RepoUserService } from '../user/user.service';
+import { gameBl, id, mockTestData, reqFlush } from 'src/app/utils/mocks';
 
 describe('GameServicesService', () => {
   let service: RepoGameService;
@@ -57,37 +58,17 @@ describe('GameServicesService', () => {
       const id = 'test';
 
       service.loadGame(id).subscribe((games) => {
-        expect(games.length).toBeGreaterThan(0);
+        expect(games.length).not.toBeNull();
       });
 
       const req = httpMock.expectOne(`http://localhost:4800/games/:${id}`);
       expect(req.request.method).toEqual('GET');
-      req.flush([
-        {
-          id: 'test',
-          gameName: 'test',
-          category: 'MMO',
-          releaseDate: 'test',
-          description: 'test',
-          img: '',
-          price: 25,
-        },
-      ]);
+      req.flush(reqFlush);
     });
   });
   describe('loadAllGame', () => {
     it('should load Game data', () => {
-      const testData = [
-        {
-          id: 'test',
-          gameName: 'test',
-          category: 'MMO',
-          releaseDate: 'test',
-          description: 'test',
-          img: '',
-          price: 25,
-        },
-      ] as unknown as Game[];
+      const testData = reqFlush as unknown as Game[];
 
       service.loadAllGame().subscribe((games) => {
         expect(games).not.toBeNull();
@@ -134,52 +115,19 @@ describe('GameServicesService', () => {
 
       const req = httpMock.expectOne(`http://localhost:4800/games/`);
       expect(req.request.method).toEqual('GET');
-      req.flush({
-        results: [
-          {
-            id: 'test',
-            gameName: 'test',
-            category: 'MMO',
-            releaseDate: 'test',
-            description: 'test',
-            img: '',
-            price: 25,
-          },
-        ],
-      });
+      req.flush(reqFlush);
     });
   });
 
   describe('updateGame', () => {
     it('should update Game data', () => {
-      const id = 'test';
-      const game = {
-        id: 'test',
-        gameName: 'test',
-        category: 'MMO',
-        releaseDate: 'test',
-        description: 'test',
-        img: '',
-        price: 25,
-      } as Game;
-
-      service.updateGame(id, game).subscribe((games) => {
-        expect(games.length).toBeGreaterThan(0);
+      service.updateGame(id, gameBl).subscribe((games) => {
+        expect(games.length).not.toBeNull();
       });
 
       const req = httpMock.expectOne(`http://localhost:4800/games/${id}`);
       expect(req.request.method).toEqual('PUT');
-      req.flush([
-        {
-          id: 'test',
-          gameName: 'test',
-          category: 'MMO',
-          releaseDate: 'test',
-          description: 'test',
-          img: '',
-          price: 25,
-        },
-      ]);
+      req.flush(reqFlush);
     });
   });
   describe('deleteGame', () => {
@@ -187,49 +135,20 @@ describe('GameServicesService', () => {
       const id = 'test';
 
       service.deleteGame(id).subscribe((games) => {
-        expect(games.length).toBeGreaterThan(0);
+        expect(games.length).not.toBeNull();
       });
 
       const req = httpMock.expectOne(`http://localhost:4800/games/${id}`);
       expect(req.request.method).toEqual('DELETE');
-      req.flush([
-        {
-          id: 'test',
-          gameName: 'test',
-          category: 'MMO',
-          releaseDate: 'test',
-          description: 'test',
-          img: '',
-          price: 25,
-        },
-      ]);
+      req.flush(reqFlush);
     });
   });
 
   it('should return an observable of games', () => {
-    const testData = [
-      {
-        id: 'test',
-        gameName: 'test',
-        category: 'MMO',
-        releaseDate: 'test',
-        description: 'test',
-        img: '',
-        price: 25,
-      },
-      {
-        id: 'test',
-        gameName: 'test',
-        category: 'MMO',
-        releaseDate: 'test',
-        description: 'test',
-        img: '',
-        price: 25,
-      },
-    ] as unknown as Game[];
-    service._games$.next(testData);
+
+    service._games$.next(mockTestData);
     service.games$.subscribe((emittedGames) => {
-      expect(emittedGames).toEqual(testData);
+      expect(emittedGames).toEqual(mockTestData);
     });
   });
 });

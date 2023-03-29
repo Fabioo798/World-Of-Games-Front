@@ -5,13 +5,8 @@ import {
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import {
-  ServerLoginResponse,
-  ServerCompleteUserResponse,
-} from 'src/app/types/server.response';
-import { Login } from 'src/app/types/types';
-import {
   mockLogin,
-  mockPass,
+  mockResp,
   mockResp1,
   mockToken,
   mockUser,
@@ -35,9 +30,7 @@ describe('RepoUserService', () => {
     expect(service).toBeTruthy();
   });
 
-  const mockResp: ServerLoginResponse = {
-    results: { token: mockToken },
-  };
+
 
 
 
@@ -63,24 +56,24 @@ describe('RepoUserService', () => {
   describe('When initialToken method is called', () => {
     describe('And there is a token in localStorage', () => {
       it('Then it should call this.token$.next with retrieved value', () => {
-        const spyNext = spyOn(service.token$, 'next').and.callThrough();
-        const spyLocal = spyOn(localStorage, 'getItem').and.returnValue(
+        const nextSpy = spyOn(service.token$, 'next').and.callThrough();
+        const localSpy = spyOn(localStorage, 'getItem').and.returnValue(
           'TestToken'
         );
 
         service.initialToken();
-        expect(spyLocal).toHaveBeenCalled();
-        expect(spyNext).toHaveBeenCalledWith('TestToken');
+        expect(localSpy).toHaveBeenCalled();
+        expect(nextSpy).toHaveBeenCalledWith('TestToken');
       });
     });
 
     describe('And there is no token in LocalStorage', () => {
       it('Then it should call this.token$.next with empty string', () => {
         const spyNext = spyOn(service.token$, 'next').and.callThrough();
-        const spyLocal = spyOn(localStorage, 'getItem').and.returnValue('');
+        const localSpy = spyOn(localStorage, 'getItem').and.returnValue('');
 
         service.initialToken();
-        expect(spyLocal).toHaveBeenCalled();
+        expect(localSpy).toHaveBeenCalled();
         expect(spyNext).toHaveBeenCalledWith('');
       });
     });
@@ -91,7 +84,7 @@ describe('RepoUserService', () => {
       it('should not return the user from API', async () => {
         service.token$.next('');
 
-        const header = new HttpHeaders({
+        const header4 = new HttpHeaders({
           ['Authorization']: `Bearer ${service.token$.value}`,
         });
         service.getCurrentUser('12345').subscribe((resp) => {
@@ -106,7 +99,7 @@ describe('RepoUserService', () => {
 
         expect(req.request.method).toEqual('GET');
         expect(JSON.stringify(req.request.headers)).toBe(
-          JSON.stringify(header)
+          JSON.stringify(header4)
         );
       });
     });
@@ -115,7 +108,7 @@ describe('RepoUserService', () => {
       it('should return the user from API', async () => {
         service.token$.next('TestToken');
 
-        const header = new HttpHeaders({
+        const header1 = new HttpHeaders({
           ['Authorization']: `Bearer ${service.token$.value}`,
         });
         service.getCurrentUser('12345').subscribe((resp) => {
@@ -130,7 +123,7 @@ describe('RepoUserService', () => {
 
         expect(req.request.method).toEqual('GET');
         expect(JSON.stringify(req.request.headers)).toBe(
-          JSON.stringify(header)
+          JSON.stringify(header1)
         );
       });
     });
@@ -155,7 +148,7 @@ describe('RepoUserService', () => {
       describe('And there is no token$', () => {
         it('should not return the user from API', async () => {
           service.token$.next('TestToken');
-          const header = new HttpHeaders({
+          const header2 = new HttpHeaders({
             ['Authorization']: `Bearer ${service.token$.value}`,
           });
 
@@ -171,7 +164,7 @@ describe('RepoUserService', () => {
 
           expect(req.request.method).toEqual('PUT');
           expect(JSON.stringify(req.request.headers)).toBe(
-            JSON.stringify(header)
+            JSON.stringify(header2)
           );
         });
       });
@@ -181,7 +174,7 @@ describe('RepoUserService', () => {
         it('should return the user from API', async () => {
           service.token$.next('TestToken');
 
-          const header = new HttpHeaders({
+          const header3 = new HttpHeaders({
             ['Authorization']: `Bearer ${service.token$.value}`,
           });
           service.deleteUser('123').subscribe((resp) => {
@@ -196,7 +189,7 @@ describe('RepoUserService', () => {
 
           expect(req.request.method).toEqual('DELETE');
           expect(JSON.stringify(req.request.headers)).toBe(
-            JSON.stringify(header)
+            JSON.stringify(header3)
           );
         });
       });

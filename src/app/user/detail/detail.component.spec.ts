@@ -78,12 +78,20 @@ describe('DetailComponent', () => {
       expect(spyOnGame).toHaveBeenCalled();
     });
   });
-  describe('When deleteGame is called', () => {
+  describe('When deleteUser is called', () => {
     it('should call deleteGame', () => {
       const spyOnUser = spyOn(srv, 'deleteUser').and.callThrough();
       component.deleteUser(mockUser.id as any);
 
       expect(spyOnUser).toHaveBeenCalled();
+    });
+  });
+  describe('When Logout is called', () => {
+    it('should lead back to home', () => {
+      const spyOnZone = spyOn(component.zone, 'run').and.callThrough()
+      component.logoutUser();
+
+      expect(spyOnZone).toHaveBeenCalled();
     });
   });
 });

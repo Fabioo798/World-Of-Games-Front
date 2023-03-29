@@ -25,8 +25,8 @@ export class UserDetailComponent {
   editGame(game: Game) {
     this.gamesrv.gameInfo$.next(game);
     this.zone.run(() => {
-    this.router.navigate(['create']);
-    })
+      this.router.navigate(['create']);
+    });
   }
   editUser() {
     this.zone.run(() => {
@@ -47,6 +47,14 @@ export class UserDetailComponent {
       this.zone.run(() => {
         this.router.navigate(['/home/']);
       });
+    });
+  }
+
+  logoutUser() {
+    this.srv.currentUser$.next({} as any);
+    this.srv.userLogged$.next({} as any);
+    this.zone.run(() => {
+      this.router.navigate(['/home/']);
     });
   }
 }
