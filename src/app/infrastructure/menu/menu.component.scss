@@ -9,6 +9,19 @@ nav {
     justify-content: center;
     align-items: center;
 
+    .rotate {
+      animation: rotate 1s;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
     img {
       max-height: 85px;
       max-width: 85px;

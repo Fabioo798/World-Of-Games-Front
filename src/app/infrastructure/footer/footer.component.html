@@ -1,4 +1,5 @@
-<div class="menu" *ngIf="currentPage !== '/home' && currentPage !== '/login' && currentPage !== '/register' && currentPage !== '/'">
+<div class="menu"
+  *ngIf="currentPage !== '/home' && currentPage !== '/login' && currentPage !== '/register' && currentPage !== '/'">
   <ng-content></ng-content>
 </div>
 <div class="login" *ngIf="currentPage === '/login'">

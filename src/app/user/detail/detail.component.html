@@ -3,7 +3,7 @@
 
 <div class="user-info" *ngIf="this.currentUser$ | async as user">
   <div class="user-details">
-    <h1>User Details</h1>
+    <h1 class="details-title">User Details</h1>
     <div class="user-info">
       <div class="user-avatar">
         <img src="{{ user.img }}" alt="User Avatar">
@@ -11,12 +11,12 @@
       <div class="user-details-info">
         <p>Name: {{ user.name }}</p>
         <p>Email: {{ user.email }}</p>
-        <p>Address: {{ user.address || 'N/A' }}</p>
+        <p>Address: {{ user.address || 'Calle de virato 20' }}</p>
+      </div>
+      <div class="user-options">
         <mat-icon (click)="deleteUser(user)">delete</mat-icon>
         <mat-icon (click)="editUser()">edit</mat-icon>
-      </div>
-      <div>
-        <button (click)="logoutUser()">LOG OUT</button>
+        <mat-icon class="log-out" (click)="logoutUser()">exit_to_app</mat-icon>
       </div>
     </div>
     <div class="user-games">
@@ -24,12 +24,14 @@
       <ul>
         <li *ngFor="let game of user.myGames">
           <div class="game-info">
-            <img src="{{ game.img }}" alt="Game Cover">
+            <img class="game-photo" src="{{ game.img }}" alt="Game Cover">
             <div class="game-details">
               <p>{{ game.gameName }}</p>
               <p>{{ game.category }}</p>
               <p>Release Date: {{ game.releaseDate }}</p>
-              <p>Price: {{ game.price }}</p>
+              <p>Price: {{ game.price }}€</p>
+            </div>
+            <div class="mat-modify">
               <mat-icon (click)="deleteGame(game)">delete</mat-icon>
               <mat-icon (click)="editGame(game)">edit</mat-icon>
             </div>

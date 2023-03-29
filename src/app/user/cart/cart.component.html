@@ -1,20 +1,19 @@
 <img class="background" alt="home-background" class="image" src="./../../../assets/background3.png">
 <div class="user-info" *ngIf="this.currentUser$ | async as user">
+  <h2>My Cart</h2>
   <div class="user-games">
-    <h2>My Games</h2>
     <ul>
       <li *ngFor="let game of user.shopList">
         <div class="game-info">
-          <img src="{{ game.img }}" alt="Game Cover">
+          <img class="game-photo" src="{{ game.img }}" alt="Game Cover">
           <div class="game-details">
             <p>{{ game.gameName }}</p>
             <p>{{ game.category }}</p>
             <p>Release Date: {{ game.releaseDate }}</p>
-            <p>Price: {{ game.price }}</p>
-            <p>{{ game.description }}</p>
-            <mat-icon (click)="removeGame(game)">remove_shopping_cart</mat-icon>
+            <p>Price: {{ game.price }}€</p>
           </div>
         </div>
+        <mat-icon (click)="removeGame(game)">remove_shopping_cart</mat-icon>
       </li>
     </ul>
   </div>

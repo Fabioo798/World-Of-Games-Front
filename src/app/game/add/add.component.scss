@@ -14,7 +14,6 @@ form {
   width: 50%;
   margin: 0 auto;
   color: white;
-  padding-top: 20%;
 
   .form-group {
     display: flex;
@@ -49,33 +48,30 @@ form {
   }
 
   .error {
-    padding-top: 20px;
     color: red;
     font-size: 20px;
   }
 
   select {
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      background-color: #fff;
-      color: #000;
-      cursor: pointer;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
 
-
-      appearance: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3E%3Cpath d='M6.1 10.2l3.9-4.5c.4-.4 1-.4 1.4 0l3.9 4.5c.4.4.4 1 0 1.4-.4.4-1 .4-1.4 0l-3.3-3.8-3.3 3.8c-.4.4-1 .4-1.4 0-.5-.4-.5-1 0-1.4z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 10px center;
-    }
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3E%3Cpath d='M6.1 10.2l3.9-4.5c.4-.4 1-.4 1.4 0l3.9 4.5c.4.4.4 1 0 1.4-.4.4-1 .4-1.4 0l-3.3-3.8-3.3 3.8c-.4.4-1 .4-1.4 0-.5-.4-.5-1 0-1.4z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+  }
 
   input[type="text"][formControlName="description"] {
-  height: 100px;
-}
-
+    height: 100px;
+  }
 }
 
 .text {

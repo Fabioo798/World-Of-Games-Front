@@ -1,7 +1,7 @@
 <img alt="home-background" class="image" src="./../../../assets/background3.png">
 
 <div class="game-category">
-  <label for="category-select">Filter by category:</label>
+  <label id="labelt" for="category-select">Filter by category:</label>
   <select id="category-select" [(ngModel)]="selectedCategory" (ngModelChange)="onCategorySelect()">
     <option value="">All</option>
     <option value="MOBA">MOBA</option>
