@@ -1,15 +1,12 @@
 .image {
-  position: absolute;
   z-index: -1;
   position: fixed;
   top: 0;
   left: 0;
-
   background-size: cover;
   background-position: center center;
   width: 100vh; /* make the image full screen */
   height: auto; /* make the image full screen */
-  z-index: -1; /* put the image behind other elements */
 }
 
 .user-details {
@@ -115,12 +112,9 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
 
-  .game-info {
+  .game-info img {
     display: flex;
     align-items: center;
-  }
-
-  .game-info img {
     width: 200px;
     height: 200px;
     object-fit: cover;
