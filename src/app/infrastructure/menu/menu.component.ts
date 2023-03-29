@@ -7,6 +7,7 @@ import { MenuItems } from 'src/app/types/types';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent {
+  isButtonClicked: boolean;
   btns: MenuItems[];
   constructor() {
     this.btns = [
@@ -15,5 +16,13 @@ export class MenuComponent {
       { path: 'create', label: 'Add', icon: 'add_circle_outline' },
       { path: 'user/:id', label: 'account', icon: 'person' },
     ];
+    this.isButtonClicked = false;
+  }
+
+  onClickButton() {
+    this.isButtonClicked = true;
+    setTimeout(() => {
+      this.isButtonClicked = false;
+    }, 900); // Adjust the delay time as needed
   }
 }

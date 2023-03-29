@@ -1,25 +1,29 @@
 .game-detail {
   display: flex;
   justify-content: space-between;
-  margin: 50px 0;
+  align-items: flex-start; // Align items to top of container
+  padding: 40px;
 
   .game-image {
-    flex-basis: 40%;
     margin-right: 50px;
 
     img {
-      width: 100%;
-      max-width: 500px;
+      max-width: 100%;
       height: auto;
     }
   }
 
   .game-info {
-    flex-basis: 60%;
-    color: white;
+    width: calc(
+      40% - 50px
+    ); // Width is 40% of container minus margin from image
+  }
 
-    h2 {
-      font-size: 32px;
+  .game-info {
+    width: 60%;
+
+    .game-name {
+      font-size: 36px;
       margin-bottom: 20px;
     }
 
@@ -36,29 +40,42 @@
 
     .game-description {
       font-size: 18px;
-      margin-bottom: 20px;
-    }
-
-    .game-owner {
-      display: flex;
-      align-items: center;
-      font-size: 16px;
-
-      img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        margin-right: 10px;
-      }
+      line-height: 1.5;
     }
   }
 }
+.description {
+  width: 100%; // Full width for description
+  margin-top: 40px;
+}
 
 .image {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vh; /* make the image full screen */
-  height: auto; /* make the image full screen */
+  height: 100%; /* make the image full screen */
   z-index: -1; /* put the image behind other elements */
+}
+
+.background {
+  background-color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 10rem;
+  padding: 20px 20px 20px 20px;
+  border-radius: 20px;
+}
+
+p {
+  font-size: 25px;
+}
+
+.game-price {
+  font-weight: bold;
+  font-size: 40px;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  font-size: xxx-large;
 }

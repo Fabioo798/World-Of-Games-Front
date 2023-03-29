@@ -9,7 +9,6 @@ import { filter } from 'rxjs/operators';
 })
 export class FooterComponent implements OnInit {
   currentPage: string = '/';
-
   constructor(private router: Router) {}
 
   ngOnInit(): void {

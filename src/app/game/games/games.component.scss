@@ -23,14 +23,22 @@
   height: 2rem;
   width: 17rem;
   text-decoration: none;
+  color: white;
+  font-size: 24px;
+  padding-left: 1rem;
 }
-
+#labelt {
+  font-size: 32px;
+  color: white;
+  padding-bottom: 0.5rem;
+}
 /* Style for the category select options */
 #category-select option {
-  background-color: #4caf50; /* Change this to your preferred background color */
+  background-color: #31312c; /* Change this to your preferred background color */
   color: white;
   border-radius: 5px;
   padding: 5px 10px;
+  font-size: 18px;
 }
 
 ul {
@@ -65,8 +73,6 @@ a {
   width: 100%;
 }
 
-
-
 .game-img {
   width: 200px;
   height: 200px;
@@ -99,4 +105,9 @@ p:last-child {
 
 mat-icon {
   color: black;
+  width: 80px;
+  position: relative;
+  top: 60px;
+  font-size: 50px;
+  height: 50px;
 }
