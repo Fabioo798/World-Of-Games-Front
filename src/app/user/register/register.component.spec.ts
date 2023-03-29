@@ -67,7 +67,7 @@ describe('RegisterComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('When we have a game to update', () => {
+  describe('As we have a game to update', () => {
     it('Should call the RepoUserService service and next', fakeAsync(() => {
       const newSpyGame = spyOn(srv, 'updateUser').and.returnValue(of(mockUser));
       const spyZoneRun = spyOn(component.zone, 'run').and.callThrough();
