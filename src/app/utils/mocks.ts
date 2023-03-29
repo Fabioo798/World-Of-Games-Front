@@ -1,6 +1,7 @@
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import {
-  ServerCompleteUserResponse, ServerLoginResponse,
+  ServerCompleteUserResponse,
+  ServerLoginResponse,
 } from '../types/server.response';
 import { Game, LoggedUser, Login, User } from '../types/types';
 
@@ -27,7 +28,7 @@ export const mockGame: Game = {
 export const mockGame1: Game = {
   gameName: 'test',
   category: 'MMO',
-  description: 'test',
+  description: 'test12',
   img: '',
   price: 20,
   releaseDate: 'test',
@@ -157,7 +158,6 @@ export const mockEvent = {
 export const mockResp: ServerLoginResponse = {
   results: { token: mockToken },
 };
-
 
 export const reqFlush = {
   results: [
