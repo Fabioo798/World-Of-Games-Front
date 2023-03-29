@@ -30,7 +30,7 @@ export class LoginComponent {
   }
 
   async ngOnInit(): Promise<void> {
-    this.srv.token$.subscribe((x) => console.log(x));
+    this.srv.token$.subscribe();
   }
 
   handleSubmit() {

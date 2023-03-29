@@ -43,6 +43,14 @@ export const mockUser: User = {
   img: '',
   shopList: [mockGame, mockGame1],
 };
+export const mockUser3: User = {
+  id: '6789',
+  name: 'Fabio',
+  email: 'Fab@example.com',
+  password: mockPass,
+  img: '',
+  shopList: [mockGame, mockGame1],
+};
 
 export const mockLogged: LoggedUser = {
   id: '2132454',
@@ -129,6 +137,9 @@ export const mockLogin: Login = {
 };
 export const mockResp1: ServerCompleteUserResponse = {
   results: [mockUser],
+};
+export const mockResp2: ServerCompleteUserResponse = {
+  results: [mockUser3],
 };
 
 export const mockEvent = {

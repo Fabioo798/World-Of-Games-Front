@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, Event, NavigationEnd } from '@angular/router';
-import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { RepoUserService } from 'src/app/services/user/user.service';
-import { LoggedUser } from 'src/app/types/types';
 
 @Component({
   selector: 'app-footer',

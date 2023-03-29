@@ -8,9 +8,11 @@ import {
   mockLogin,
   mockResp,
   mockResp1,
+  mockResp2,
   mockToken,
   mockUser,
   mockUser1,
+  mockUser3,
 } from 'src/app/utils/mocks';
 import { RepoUserService } from './user.service';
 
@@ -29,10 +31,6 @@ describe('RepoUserService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-
-
-
-
 
   describe('When the login method is called', () => {
     it('Then it should return the token', () => {
@@ -80,8 +78,8 @@ describe('RepoUserService', () => {
   });
 
   describe('When the getCurrentUser method is called', () => {
-    describe('And there is no token$', () => {
-      it('should not return the user from API', async () => {
+    describe('if we have token$', () => {
+      it('it should not return the user from API', async () => {
         service.token$.next('');
 
         const header4 = new HttpHeaders({
@@ -111,15 +109,15 @@ describe('RepoUserService', () => {
         const header1 = new HttpHeaders({
           ['Authorization']: `Bearer ${service.token$.value}`,
         });
-        service.getCurrentUser('12345').subscribe((resp) => {
+        service.getCurrentUser('6789').subscribe((resp) => {
           expect(resp).not.toBeNull();
-          expect(JSON.stringify(resp)).toBe(JSON.stringify(mockUser));
+          expect(JSON.stringify(resp)).toBe(JSON.stringify(mockUser3));
         });
         expect(httpTestingController).toBeTruthy();
         const req = httpTestingController.expectOne(
-          'http://localhost:4800/users/12345'
+          'http://localhost:4800/users/6789'
         );
-        req.flush(mockResp1);
+        req.flush(mockResp2);
 
         expect(req.request.method).toEqual('GET');
         expect(JSON.stringify(req.request.headers)).toBe(
