@@ -6,7 +6,13 @@ import {
 import { RepoGameService } from './game.services.service';
 import { Game } from 'src/app/types/types';
 import { RepoUserService } from '../user/user.service';
-import { gameBl, id, mockTestData, reqFlush } from 'src/app/utils/mocks';
+import {
+  gameBl,
+  id,
+  mockTestData,
+  reqFlush,
+  TestApiGameUrl,
+} from 'src/app/utils/mocks';
 
 describe('GameServicesService', () => {
   let service: RepoGameService;
@@ -47,7 +53,7 @@ describe('GameServicesService', () => {
         expect(result).toBeDefined();
       });
 
-      const req = httpMock.expectOne('http://localhost:4800/games/');
+      const req = httpMock.expectOne(TestApiGameUrl);
       expect(req.request.method).toEqual('POST');
       req.flush({ result: true });
     });
@@ -61,7 +67,9 @@ describe('GameServicesService', () => {
         expect(games.length).not.toBeNull();
       });
 
-      const req = httpMock.expectOne(`http://localhost:4800/games/:${id}`);
+      const req = httpMock.expectOne(
+        `https://wog-backend.onrender.com/games/${id}`
+      );
       expect(req.request.method).toEqual('GET');
       req.flush(reqFlush);
     });
@@ -74,7 +82,7 @@ describe('GameServicesService', () => {
         expect(games).not.toBeNull();
       });
 
-      const req = httpMock.expectOne('http://localhost:4800/games/');
+      const req = httpMock.expectOne(TestApiGameUrl);
       expect(req.request.method).toEqual('GET');
       req.flush({ results: testData });
     });
@@ -88,9 +96,7 @@ describe('GameServicesService', () => {
         expect(games.length).not.toBeNull();
       });
 
-      const req = httpMock.expectOne(
-        `http://localhost:4800/games/filter/${category}`
-      );
+      const req = httpMock.expectOne(TestApiGameUrl + `filter/${category}`);
       expect(req.request.method).toEqual('GET');
       req.flush({
         results: [
@@ -113,7 +119,7 @@ describe('GameServicesService', () => {
         expect(games.length).not.toBeNull();
       });
 
-      const req = httpMock.expectOne(`http://localhost:4800/games/`);
+      const req = httpMock.expectOne(TestApiGameUrl);
       expect(req.request.method).toEqual('GET');
       req.flush(reqFlush);
     });
@@ -125,7 +131,7 @@ describe('GameServicesService', () => {
         expect(games.length).not.toBeNull();
       });
 
-      const req = httpMock.expectOne(`http://localhost:4800/games/${id}`);
+      const req = httpMock.expectOne(TestApiGameUrl + id);
       expect(req.request.method).toEqual('PUT');
       req.flush(reqFlush);
     });
@@ -138,14 +144,13 @@ describe('GameServicesService', () => {
         expect(games.length).not.toBeNull();
       });
 
-      const req = httpMock.expectOne(`http://localhost:4800/games/${id}`);
+      const req = httpMock.expectOne(TestApiGameUrl + id);
       expect(req.request.method).toEqual('DELETE');
       req.flush(reqFlush);
     });
   });
 
   it('should return an observable of games', () => {
-
     service._games$.next(mockTestData);
     service.games$.subscribe((emittedGames) => {
       expect(emittedGames).toEqual(mockTestData);

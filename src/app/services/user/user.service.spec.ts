@@ -13,6 +13,7 @@ import {
   mockUser,
   mockUser1,
   mockUser3,
+  TestApiUserUrl,
 } from 'src/app/utils/mocks';
 import { RepoUserService } from './user.service';
 
@@ -43,9 +44,7 @@ describe('RepoUserService', () => {
         expect(spyLocal).toHaveBeenCalled();
         expect(spyNext).toHaveBeenCalled();
       });
-      const req = httpTestingController.expectOne(
-        'http://localhost:4800/users/login'
-      );
+      const req = httpTestingController.expectOne(TestApiUserUrl + '/login');
       expect(req.request.method).toEqual('POST');
       req.flush(mockResp);
     });
@@ -90,9 +89,7 @@ describe('RepoUserService', () => {
           expect(JSON.stringify(resp)).toBe(JSON.stringify(mockUser));
         });
         expect(httpTestingController).toBeTruthy();
-        const req = httpTestingController.expectOne(
-          'http://localhost:4800/users/12345'
-        );
+        const req = httpTestingController.expectOne(TestApiUserUrl + '/12345');
         req.flush(mockResp1);
 
         expect(req.request.method).toEqual('GET');
@@ -114,9 +111,7 @@ describe('RepoUserService', () => {
           expect(JSON.stringify(resp)).toBe(JSON.stringify(mockUser3));
         });
         expect(httpTestingController).toBeTruthy();
-        const req = httpTestingController.expectOne(
-          'http://localhost:4800/users/6789'
-        );
+        const req = httpTestingController.expectOne(TestApiUserUrl + '/6789');
         req.flush(mockResp2);
 
         expect(req.request.method).toEqual('GET');
@@ -133,9 +128,7 @@ describe('RepoUserService', () => {
         expect(resp).not.toBeNull();
       });
       expect(httpTestingController).toBeTruthy();
-      const req = httpTestingController.expectOne(
-        'http://localhost:4800/users/register'
-      );
+      const req = httpTestingController.expectOne(TestApiUserUrl + '/register');
       req.flush(mockUser);
 
       expect(req.request.method).toEqual('POST');
@@ -155,9 +148,7 @@ describe('RepoUserService', () => {
             expect(JSON.stringify(resp)).toBe(JSON.stringify(mockUser1));
           });
           expect(httpTestingController).toBeTruthy();
-          const req = httpTestingController.expectOne(
-            'http://localhost:4800/users/123'
-          );
+          const req = httpTestingController.expectOne(TestApiUserUrl + '/123');
           req.flush(mockUser1);
 
           expect(req.request.method).toEqual('PUT');
@@ -180,9 +171,7 @@ describe('RepoUserService', () => {
             expect(JSON.stringify(resp)).toBe(JSON.stringify(mockUser1));
           });
           expect(httpTestingController).toBeTruthy();
-          const req = httpTestingController.expectOne(
-            'http://localhost:4800/users/123'
-          );
+          const req = httpTestingController.expectOne(TestApiUserUrl + '/123');
           req.flush(mockUser1);
 
           expect(req.request.method).toEqual('DELETE');

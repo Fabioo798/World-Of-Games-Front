@@ -163,7 +163,7 @@ export const mockResp: ServerLoginResponse = {
 export const reqFlush = {
   results: [
     {
-      id: 'test',
+      id: 'test1',
       gameName: 'test',
       category: 'MMO',
       releaseDate: 'test',
@@ -206,3 +206,6 @@ export const mockTestData = [
     price: 25,
   },
 ] as unknown as Game[];
+
+export const TestApiUserUrl = 'https://wog-backend.onrender.com/users';
+export const TestApiGameUrl = 'https://wog-backend.onrender.com/games/';

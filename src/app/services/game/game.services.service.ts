@@ -8,6 +8,7 @@ import { RepoUserService } from '../user/user.service';
   providedIn: 'root',
 })
 export class RepoGameService {
+  private apiUrl = 'https://wog-backend.onrender.com/games/';
   public _games$: BehaviorSubject<Game[]>;
   token: Token;
   gameInfo$: BehaviorSubject<Game>;
@@ -27,7 +28,7 @@ export class RepoGameService {
     return this.srv.token$.pipe(
       switchMap((token) => {
         const headers = { Authorization: `Bearer ${token}` };
-        return this.http.post('http://localhost:4800/games/', game, {
+        return this.http.post(this.apiUrl, game, {
           headers,
         });
       })
@@ -35,7 +36,7 @@ export class RepoGameService {
   }
 
   loadGame(id: string): Observable<any> {
-    return this.http.get(`http://localhost:4800/games/:${id}`);
+    return this.http.get(this.apiUrl + id);
   }
 
   public loadAllGame(): Observable<Game[]> {
@@ -43,7 +44,7 @@ export class RepoGameService {
       switchMap((token) => {
         const headers = { Authorization: `Bearer ${token}` }; // Add the token to headers
         return this.http
-          .get<{ results: Array<Game[]> }>('http://localhost:4800/games/', {
+          .get<{ results: Array<Game[]> }>(this.apiUrl, {
             headers: headers,
           })
           .pipe(
@@ -62,13 +63,12 @@ export class RepoGameService {
       switchMap((token) => {
         const headers = { Authorization: `Bearer ${token}` }; // Add the token to headers
         if (category === 'all' || category === '') {
-          allGames = this.http.get<{ results: Array<Game[]> }>(
-            'http://localhost:4800/games/',
-            { headers: headers }
-          );
+          allGames = this.http.get<{ results: Array<Game[]> }>(this.apiUrl, {
+            headers: headers,
+          });
         } else {
           allGames = this.http.get<{ results: Array<Game[]> }>(
-            `http://localhost:4800/games/filter/${category}`,
+            this.apiUrl + `filter/${category}`,
             { headers: headers }
           );
         }
@@ -86,7 +86,7 @@ export class RepoGameService {
       switchMap((token) => {
         const headers = { Authorization: `Bearer ${token}` }; // Add the token to headers
         const updateGame = game;
-        return this.http.put(`http://localhost:4800/games/${id}`, updateGame, {
+        return this.http.put(this.apiUrl + id, updateGame, {
           headers: headers,
         });
       })
@@ -96,7 +96,7 @@ export class RepoGameService {
     return this.srv.token$.pipe(
       switchMap((token) => {
         const headers = { Authorization: `Bearer ${token}` }; // Add the token to headers
-        return this.http.delete(`http://localhost:4800/games/${id}`, {
+        return this.http.delete(this.apiUrl + id, {
           headers: headers,
         });
       })
