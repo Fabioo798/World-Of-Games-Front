@@ -42,3 +42,7 @@ Contributing
 If you'd like to contribute to the frontend of the World Of Games application, you can fork the repository and submit a pull request with your changes.
 
 Before submitting a pull request, please make sure that your changes are thoroughly tested and documented.
+
+## Testing
+
+The application is 100% fully tested with jasmine with unitary tests
