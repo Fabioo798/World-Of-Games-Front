@@ -7,6 +7,13 @@
   z-index: -1; /* put the image behind other elements */
 }
 
+h1 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  color: white;
+  text-align: center;
+}
+
 form {
   display: flex;
   top: 50%;
@@ -14,7 +21,6 @@ form {
   width: 50%;
   margin: 0 auto;
   color: white;
-  padding-top: 40%;
 
   .form-group {
     display: flex;

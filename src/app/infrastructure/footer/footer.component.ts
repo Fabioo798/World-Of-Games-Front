@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, Event, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { RepoUserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-footer',
@@ -9,7 +10,12 @@ import { filter } from 'rxjs/operators';
 })
 export class FooterComponent implements OnInit {
   currentPage: string = '/';
-  constructor(private router: Router) {}
+  isLogged: string | undefined = '';
+  constructor(private router: Router, public srv: RepoUserService) {
+    this.srv.currentUser$.subscribe((user) => {
+      this.isLogged = user?.id;
+    });
+  }
 
   ngOnInit(): void {
     this.router.events
@@ -20,6 +26,7 @@ export class FooterComponent implements OnInit {
         )
       )
       .subscribe((event: NavigationEnd) => {
+        console.log(this.isLogged);
         this.currentPage = event.url;
       });
   }

@@ -2,12 +2,15 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router, NavigationEnd } from '@angular/router';
 import { FooterComponent } from './footer.component';
 import { Subject } from 'rxjs';
+import { RepoUserService } from 'src/app/services/user/user.service';
+import { mockUserService } from 'src/app/utils/mocks';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
   let fixture: ComponentFixture<FooterComponent>;
   let router: Router;
   let routerEventsSubject: Subject<any>;
+  let srv: RepoUserService;
 
   beforeEach(async () => {
     routerEventsSubject = new Subject<any>();
@@ -21,6 +24,7 @@ describe('FooterComponent', () => {
             events: routerEventsSubject.asObservable(),
           },
         },
+        { provide: RepoUserService, useValue: mockUserService },
       ],
     }).compileComponents();
 

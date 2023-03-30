@@ -1,5 +1,6 @@
 <img class="background" alt="home-background" class="image" src="./../../../assets/backgroun2.jpg">
-
+<h1 *ngIf="!isUpdate">Register</h1>
+<h1 *ngIf="isUpdate">Edit</h1>
 <form class="register-form" [formGroup]="newUser" (ngSubmit)="handleSubmit()">
   <div class="form-group">
     <label for="name">Name:</label>
