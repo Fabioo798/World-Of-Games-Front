@@ -8,12 +8,11 @@ import {
 import { LoggedUser, Login, User } from 'src/app/types/types';
 import * as jose from 'jose';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class RepoUserService {
-  private apiUrl = 'http://localhost:4800/users';
+  apiUrl = 'https://wog-backend.onrender.com/users';
   token$: BehaviorSubject<string>;
   currentUser$: BehaviorSubject<User>;
   userLogged$: BehaviorSubject<LoggedUser>;
@@ -77,7 +76,7 @@ export class RepoUserService {
     const updateUser = user;
     const token = this.token$.value;
     const headers = { Authorization: `Bearer ${token}` }; // Add the token to headers
-    return this.http.put(this.apiUrl + '/' + id, updateUser,  {
+    return this.http.put(this.apiUrl + '/' + id, updateUser, {
       headers: headers,
     });
   }
