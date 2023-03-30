@@ -120,6 +120,7 @@ export const mockGameService = {
 
   gameInfo$: new BehaviorSubject<Game>(mockGame),
   token: { results: { token: '' } },
+  currentUser$: new BehaviorSubject<User>({} as User),
 };
 
 export const mockGametoUp = {
