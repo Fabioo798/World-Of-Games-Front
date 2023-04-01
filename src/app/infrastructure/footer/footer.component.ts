@@ -12,7 +12,7 @@ export class FooterComponent implements OnInit {
   currentPage: string = '/';
   isLogged: string | undefined = '';
   constructor(private router: Router, public srv: RepoUserService) {
-    this.srv.currentUser$.subscribe((user) => {
+    this.srv.userLogged$.subscribe((user) => {
       this.isLogged = user?.id;
     });
   }
@@ -26,7 +26,6 @@ export class FooterComponent implements OnInit {
         )
       )
       .subscribe((event: NavigationEnd) => {
-        console.log(this.isLogged);
         this.currentPage = event.url;
       });
   }

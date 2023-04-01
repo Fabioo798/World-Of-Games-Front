@@ -1,18 +1,15 @@
-<div class="menu"
-  *ngIf="currentPage !== '/home' && currentPage !== '/login' && currentPage !== '/register' && currentPage !== '/'">
+<div class="menu" *ngIf="currentPage !== '/home' && currentPage !== '/login' && isLogged !== '' && currentPage !== '/'">
   <ng-content></ng-content>
 </div>
 <div class="login" *ngIf="currentPage === '/login'">
   <p>Don't have an account yet? <span routerLink="/register">Register</span></p>
 </div>
-<div class="login" *ngIf="currentPage === '/register' && isLogged === undefined">
+<div class="login" *ngIf="currentPage === '/register' && isLogged === ''">
   <p>You already have an account? <span routerLink="/login">Login</span></p>
-</div>
-<div class="login" *ngIf="currentPage === '/register' && isLogged !== undefined">
 </div>
 <div class="login" *ngIf="currentPage ===  '/home' ">
   <p>Don't have an account yet? <span routerLink="/register">Register</span></p>
 </div>
 <div class="login" *ngIf="currentPage ===  '/' ">
-  <p>Don't you have an account yet? <span routerLink="/register">Register</span></p>
+  <p>Don't have an account yet? <span routerLink="/register">Register</span></p>
 </div>

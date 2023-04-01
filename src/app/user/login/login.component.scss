@@ -1,12 +1,12 @@
 .image {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100vh; /* make the image full screen */
-  height: auto; /* make the image full screen */
-  z-index: -1; /* put the image behind other elements */
+  width: 100vh;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
-
 h1 {
   font-size: 3rem;
   margin-bottom: 2rem;
